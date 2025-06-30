@@ -1,5 +1,4 @@
-
-import { Home, TrendingUp, Subscriptions, Library, History, PlaySquare, Clock, ThumbsUp, Download, Settings } from 'lucide-react';
+import { Home, TrendingUp, Users, Library, History, PlaySquare, Clock, ThumbsUp, Download, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -11,7 +10,7 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
   const menuItems = [
     { icon: Home, label: 'ホーム', active: true },
     { icon: TrendingUp, label: 'トレンド' },
-    { icon: Subscriptions, label: '登録チャンネル' },
+    { icon: Users, label: '登録チャンネル' },
   ];
 
   const libraryItems = [
