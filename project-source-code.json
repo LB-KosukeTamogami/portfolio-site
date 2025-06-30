@@ -1,0 +1,95 @@
+
+{
+  "project": {
+    "name": "VideoTube - YouTube Clone",
+    "description": "YouTubeライクな動画共有プラットフォーム",
+    "framework": "React + TypeScript + Vite",
+    "styling": "Tailwind CSS + shadcn/ui"
+  },
+  "files": {
+    "src/pages/Index.tsx": {
+      "type": "main-page",
+      "content": "import { useState } from 'react';\nimport Header from '@/components/Header';\nimport Sidebar from '@/components/Sidebar';\nimport VideoCard from '@/components/VideoCard';\nimport { cn } from '@/lib/utils';\n\nconst Index = () => {\n  const [sidebarOpen, setSidebarOpen] = useState(true);\n\n  // サンプル動画データ\n  const videos = [\n    {\n      id: 1,\n      thumbnail: \"https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=225&fit=crop\",\n      title: \"React初心者向けチュートリアル - コンポーネントの基礎から学ぶ\",\n      channel: \"Tech Learning\",\n      views: \"123万回視聴\",\n      timestamp: \"2日前\",\n      duration: \"15:42\",\n      verified: true\n    },\n    {\n      id: 2,\n      thumbnail: \"https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=225&fit=crop\",\n      title: \"JavaScript ES6+ 完全ガイド - モダンなプログラミング手法\",\n      channel: \"Code Masters\",\n      views: \"87万回視聴\",\n      timestamp: \"1週間前\",\n      duration: \"28:15\",\n      verified: true\n    },\n    {\n      id: 3,\n      thumbnail: \"https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=225&fit=crop\",\n      title: \"Web開発者のための効率的なワークフロー構築\",\n      channel: \"Developer Hub\",\n      views: \"45万回視聴\",\n      timestamp: \"3日前\",\n      duration: \"12:30\"\n    },\n    {\n      id: 4,\n      thumbnail: \"https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=225&fit=crop\",\n      title: \"TypeScriptで作る本格的なWebアプリケーション\",\n      channel: \"Pro Coders\",\n      views: \"210万回視聴\",\n      timestamp: \"5日前\",\n      duration: \"45:20\",\n      verified: true\n    },\n    {\n      id: 5,\n      thumbnail: \"https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=225&fit=crop\",\n      title: \"UI/UXデザインの基本原則 - ユーザーファーストなデザイン\",\n      channel: \"Design Studio\",\n      views: \"156万回視聴\",\n      timestamp: \"1週間前\",\n      duration: \"22:45\"\n    },\n    {\n      id: 6,\n      thumbnail: \"https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=225&fit=crop\",\n      title: \"Next.js 14の新機能とパフォーマンス最適化\",\n      channel: \"Tech Learning\",\n      views: \"89万回視聴\",\n      timestamp: \"4日前\",\n      duration: \"18:30\",\n      verified: true\n    },\n    {\n      id: 7,\n      thumbnail: \"https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=225&fit=crop\",\n      title: \"GraphQLとREST APIの比較 - どちらを選ぶべきか\",\n      channel: \"API Masters\",\n      views: \"67万回視聴\",\n      timestamp: \"6日前\",\n      duration: \"25:10\"\n    },\n    {\n      id: 8,\n      thumbnail: \"https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=225&fit=crop\",\n      title: \"Docker完全入門 - コンテナ技術の基礎から実践まで\",\n      channel: \"DevOps Pro\",\n      views: \"134万回視聴\",\n      timestamp: \"1週間前\",\n      duration: \"35:45\",\n      verified: true\n    }\n  ];\n\n  return (\n    <div className=\"min-h-screen bg-background\">\n      <Header onMenuToggle={() => setSidebarOpen(!sidebarOpen)} />\n      <Sidebar isOpen={sidebarOpen} />\n      \n      <main\n        className={cn(\n          \"transition-all duration-300 pt-4\",\n          sidebarOpen ? \"ml-60\" : \"ml-16\"\n        )}\n      >\n        <div className=\"px-6\">\n          <div className=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 animate-fade-in\">\n            {videos.map((video) => (\n              <VideoCard\n                key={video.id}\n                thumbnail={video.thumbnail}\n                title={video.title}\n                channel={video.channel}\n                views={video.views}\n                timestamp={video.timestamp}\n                duration={video.duration}\n                verified={video.verified}\n              />\n            ))}\n          </div>\n        </div>\n      </main>\n    </div>\n  );\n};\n\nexport default Index;"
+    },
+    "src/components/Header.tsx": {
+      "type": "component",
+      "content": "import { Search, Menu, Video, Bell, User } from 'lucide-react';\nimport { Button } from '@/components/ui/button';\nimport { Input } from '@/components/ui/input';\n\ninterface HeaderProps {\n  onMenuToggle: () => void;\n}\n\nconst Header = ({ onMenuToggle }: HeaderProps) => {\n  return (\n    <header className=\"flex items-center justify-between px-4 py-2 bg-youtube-dark border-b border-border sticky top-0 z-50\">\n      <div className=\"flex items-center space-x-4\">\n        <Button\n          variant=\"ghost\"\n          size=\"sm\"\n          onClick={onMenuToggle}\n          className=\"hover:bg-youtube-gray\"\n        >\n          <Menu className=\"h-5 w-5\" />\n        </Button>\n        <div className=\"flex items-center space-x-2\">\n          <div className=\"w-8 h-8 bg-youtube-red rounded-lg flex items-center justify-center\">\n            <Video className=\"h-5 w-5 text-white\" />\n          </div>\n          <h1 className=\"text-xl font-bold\">VideoTube</h1>\n        </div>\n      </div>\n\n      <div className=\"flex-1 max-w-2xl mx-8\">\n        <div className=\"relative flex\">\n          <Input\n            type=\"text\"\n            placeholder=\"検索\"\n            className=\"flex-1 bg-youtube-darker border-youtube-gray focus:border-youtube-red rounded-l-full rounded-r-none px-4 py-2\"\n          />\n          <Button className=\"bg-youtube-gray hover:bg-youtube-gray/80 rounded-r-full rounded-l-none px-6\">\n            <Search className=\"h-4 w-4\" />\n          </Button>\n        </div>\n      </div>\n\n      <div className=\"flex items-center space-x-3\">\n        <Button variant=\"ghost\" size=\"sm\" className=\"hover:bg-youtube-gray\">\n          <Video className=\"h-5 w-5\" />\n        </Button>\n        <Button variant=\"ghost\" size=\"sm\" className=\"hover:bg-youtube-gray\">\n          <Bell className=\"h-5 w-5\" />\n        </Button>\n        <Button variant=\"ghost\" size=\"sm\" className=\"hover:bg-youtube-gray rounded-full\">\n          <User className=\"h-5 w-5\" />\n        </Button>\n      </div>\n    </header>\n  );\n};\n\nexport default Header;"
+    },
+    "src/components/Sidebar.tsx": {
+      "type": "component",
+      "content": "import { Home, TrendingUp, Users, Library, History, PlaySquare, Clock, ThumbsUp, Download, Settings } from 'lucide-react';\nimport { Button } from '@/components/ui/button';\nimport { cn } from '@/lib/utils';\n\ninterface SidebarProps {\n  isOpen: boolean;\n}\n\nconst Sidebar = ({ isOpen }: SidebarProps) => {\n  const menuItems = [\n    { icon: Home, label: 'ホーム', active: true },\n    { icon: TrendingUp, label: 'トレンド' },\n    { icon: Users, label: '登録チャンネル' },\n  ];\n\n  const libraryItems = [\n    { icon: Library, label: 'ライブラリ' },\n    { icon: History, label: '履歴' },\n    { icon: PlaySquare, label: 'あなたの動画' },\n    { icon: Clock, label: '後で見る' },\n    { icon: ThumbsUp, label: '高く評価した動画' },\n    { icon: Download, label: 'オフライン' },\n  ];\n\n  return (\n    <aside\n      className={cn(\n        \"fixed left-0 top-16 h-full bg-youtube-dark border-r border-border transition-all duration-300 z-40 overflow-y-auto\",\n        isOpen ? \"w-60\" : \"w-16\"\n      )}\n    >\n      <div className=\"py-2\">\n        <div className=\"space-y-1 px-2\">\n          {menuItems.map((item, index) => (\n            <Button\n              key={index}\n              variant=\"ghost\"\n              className={cn(\n                \"w-full justify-start hover:bg-youtube-gray\",\n                item.active && \"bg-youtube-gray\",\n                !isOpen && \"justify-center\"\n              )}\n            >\n              <item.icon className=\"h-5 w-5\" />\n              {isOpen && <span className=\"ml-3\">{item.label}</span>}\n            </Button>\n          ))}\n        </div>\n\n        {isOpen && (\n          <>\n            <div className=\"border-t border-border my-3\"></div>\n            <div className=\"space-y-1 px-2\">\n              {libraryItems.map((item, index) => (\n                <Button\n                  key={index}\n                  variant=\"ghost\"\n                  className=\"w-full justify-start hover:bg-youtube-gray\"\n                >\n                  <item.icon className=\"h-5 w-5\" />\n                  <span className=\"ml-3\">{item.label}</span>\n                </Button>\n              ))}\n            </div>\n\n            <div className=\"border-t border-border my-3\"></div>\n            <div className=\"space-y-1 px-2\">\n              <Button\n                variant=\"ghost\"\n                className=\"w-full justify-start hover:bg-youtube-gray\"\n              >\n                <Settings className=\"h-5 w-5\" />\n                <span className=\"ml-3\">設定</span>\n              </Button>\n            </div>\n          </>\n        )}\n      </div>\n    </aside>\n  );\n};\n\nexport default Sidebar;"
+    },
+    "src/components/VideoCard.tsx": {
+      "type": "component",
+      "content": "import { MoreVertical, CheckCircle } from 'lucide-react';\nimport { Button } from '@/components/ui/button';\n\ninterface VideoCardProps {\n  thumbnail: string;\n  title: string;\n  channel: string;\n  views: string;\n  timestamp: string;\n  duration: string;\n  verified?: boolean;\n}\n\nconst VideoCard = ({ thumbnail, title, channel, views, timestamp, duration, verified = false }: VideoCardProps) => {\n  return (\n    <div className=\"video-card group\">\n      <div className=\"relative\">\n        <img\n          src={thumbnail}\n          alt={title}\n          className=\"w-full aspect-video object-cover\"\n        />\n        <div className=\"absolute bottom-2 right-2 bg-black/80 text-white text-xs px-1 py-0.5 rounded\">\n          {duration}\n        </div>\n        <div className=\"absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300\"></div>\n      </div>\n      \n      <div className=\"p-3\">\n        <div className=\"flex gap-3\">\n          <div className=\"w-9 h-9 bg-gradient-to-br from-youtube-red to-purple-600 rounded-full flex-shrink-0 flex items-center justify-center\">\n            <span className=\"text-white text-sm font-bold\">{channel[0]}</span>\n          </div>\n          \n          <div className=\"flex-1 min-w-0\">\n            <h3 className=\"font-medium text-sm leading-5 line-clamp-2 mb-1 group-hover:text-white transition-colors\">\n              {title}\n            </h3>\n            \n            <div className=\"flex items-center text-xs text-muted-foreground mb-1\">\n              <span>{channel}</span>\n              {verified && <CheckCircle className=\"w-3 h-3 ml-1 text-muted-foreground\" />}\n            </div>\n            \n            <div className=\"text-xs text-muted-foreground\">\n              {views} • {timestamp}\n            </div>\n          </div>\n          \n          <Button variant=\"ghost\" size=\"sm\" className=\"opacity-0 group-hover:opacity-100 transition-opacity\">\n            <MoreVertical className=\"h-4 w-4\" />\n          </Button>\n        </div>\n      </div>\n    </div>\n  );\n};\n\nexport default VideoCard;"
+    },
+    "src/App.tsx": {
+      "type": "root-component",
+      "content": "import { Toaster } from \"@/components/ui/toaster\";\nimport { Toaster as Sonner } from \"@/components/ui/sonner\";\nimport { TooltipProvider } from \"@/components/ui/tooltip\";\nimport { QueryClient, QueryClientProvider } from \"@tanstack/react-query\";\nimport { BrowserRouter, Routes, Route } from \"react-router-dom\";\nimport Index from \"./pages/Index\";\nimport NotFound from \"./pages/NotFound\";\n\nconst queryClient = new QueryClient();\n\nconst App = () => (\n  <QueryClientProvider client={queryClient}>\n    <TooltipProvider>\n      <Toaster />\n      <Sonner />\n      <BrowserRouter>\n        <Routes>\n          <Route path=\"/\" element={<Index />} />\n          <Route path=\"*\" element={<NotFound />} />\n        </Routes>\n      </BrowserRouter>\n    </TooltipProvider>\n  </QueryClientProvider>\n);\n\nexport default App;"
+    },
+    "src/index.css": {
+      "type": "styles",
+      "content": "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n@layer base {\n  :root {\n    --background: 240 10% 6%;\n    --foreground: 0 0% 98%;\n\n    --card: 240 10% 8%;\n    --card-foreground: 0 0% 98%;\n\n    --popover: 240 10% 8%;\n    --popover-foreground: 0 0% 98%;\n\n    --primary: 0 100% 50%;\n    --primary-foreground: 0 0% 98%;\n\n    --secondary: 240 6% 15%;\n    --secondary-foreground: 0 0% 98%;\n\n    --muted: 240 6% 15%;\n    --muted-foreground: 0 0% 66%;\n\n    --accent: 240 6% 15%;\n    --accent-foreground: 0 0% 98%;\n\n    --destructive: 0 84.2% 60.2%;\n    --destructive-foreground: 210 40% 98%;\n\n    --border: 240 6% 20%;\n    --input: 240 6% 20%;\n    --ring: 0 100% 50%;\n\n    --radius: 0.5rem;\n\n    --sidebar-background: 240 10% 6%;\n    --sidebar-foreground: 0 0% 98%;\n    --sidebar-primary: 0 100% 50%;\n    --sidebar-primary-foreground: 0 0% 98%;\n    --sidebar-accent: 240 6% 15%;\n    --sidebar-accent-foreground: 0 0% 98%;\n    --sidebar-border: 240 6% 20%;\n    --sidebar-ring: 0 100% 50%;\n  }\n}\n\n@layer base {\n  * {\n    @apply border-border;\n  }\n\n  body {\n    @apply bg-background text-foreground font-sans;\n  }\n\n  .hover-scale {\n    @apply transition-transform duration-200 hover:scale-105;\n  }\n\n  .video-card {\n    @apply bg-card rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1;\n  }\n\n  .glass-effect {\n    @apply bg-background/80 backdrop-blur-md border border-border/50;\n  }\n}"
+    },
+    "index.html": {
+      "type": "html",
+      "content": "<!DOCTYPE html>\n<html lang=\"ja\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>VideoTube - 動画共有プラットフォーム</title>\n    <meta name=\"description\" content=\"YouTubeライクな動画共有プラットフォーム\" />\n    <meta name=\"author\" content=\"Lovable\" />\n\n    <meta property=\"og:title\" content=\"VideoTube - 動画共有プラットフォーム\" />\n    <meta property=\"og:description\" content=\"YouTubeライクな動画共有プラットフォーム\" />\n    <meta property=\"og:type\" content=\"website\" />\n    <meta property=\"og:image\" content=\"https://lovable.dev/opengraph-image-p98pqg.png\" />\n\n    <meta name=\"twitter:card\" content=\"summary_large_image\" />\n    <meta name=\"twitter:site\" content=\"@lovable_dev\" />\n    <meta name=\"twitter:image\" content=\"https://lovable.dev/opengraph-image-p98pqg.png\" />\n    \n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n    <link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap\" rel=\"stylesheet\">\n  </head>\n\n  <body>\n    <div id=\"root\"></div>\n    <script type=\"module\" src=\"/src/main.tsx\"></script>\n  </body>\n</html>"
+    }
+  },
+  "features": [
+    {
+      "name": "レスポンシブデザイン",
+      "description": "モバイル、タブレット、デスクトップに対応したグリッドレイアウト"
+    },
+    {
+      "name": "ダークテーマ",
+      "description": "YouTubeライクなダークUI（カスタムカラー変数使用）"
+    },
+    {
+      "name": "折りたたみサイドバー",
+      "description": "メニューボタンで開閉可能なナビゲーション"
+    },
+    {
+      "name": "動画カード",
+      "description": "サムネイル、タイトル、チャンネル情報、再生時間表示"
+    },
+    {
+      "name": "検索機能UI",
+      "description": "ヘッダーに検索バーを配置"
+    },
+    {
+      "name": "ホバーアニメーション",
+      "description": "カードホバー時のエフェクトとトランジション"
+    },
+    {
+      "name": "認証マーク",
+      "description": "チャンネルの認証状態を視覚的に表示"
+    }
+  ],
+  "technologies": {
+    "frontend": "React 18 + TypeScript",
+    "bundler": "Vite",
+    "styling": "Tailwind CSS + shadcn/ui",
+    "icons": "Lucide React",
+    "routing": "React Router DOM",
+    "state_management": "React useState",
+    "data_fetching": "TanStack Query (React Query)",
+    "ui_components": "Radix UI Primitives"
+  },
+  "structure": {
+    "components": [
+      "Header - トップナビゲーション",
+      "Sidebar - サイドナビゲーション",
+      "VideoCard - 動画表示カード"
+    ],
+    "pages": [
+      "Index - メインページ（動画一覧）",
+      "NotFound - 404エラーページ"
+    ],
+    "styling": [
+      "Custom CSS variables for YouTube-like colors",
+      "Responsive grid layout",
+      "Hover animations and transitions"
+    ]
+  }
+}
