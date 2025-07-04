@@ -72,6 +72,11 @@ export default {
 					darker: '#0A0A0A',
 					gray: '#272727',
 					'light-gray': '#AAAAAA'
+				},
+				portfolio: {
+					blue: '#2563eb',
+					'blue-dark': '#1e40af',
+					'blue-light': '#3b82f6'
 				}
 			},
 			borderRadius: {

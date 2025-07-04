@@ -1,73 +1,110 @@
-# Welcome to your Lovable project
+# Portfolio Site
 
-## Project info
+A modern portfolio website built with Next.js, TypeScript, and Tailwind CSS, featuring a YouTube-style dark theme design.
 
-**URL**: https://lovable.dev/projects/5e6a9b0d-dcb5-4a63-af5b-b44580bbc462
+## Features
 
-## How can I edit this code?
+- 🎨 YouTube-style dark theme UI
+- 📱 Fully responsive design
+- 🗂️ Project categorization (Homepage, Landing Page, Web App, Mobile App)
+- 👤 Profile management
+- 🔐 Admin panel for content management
+- 🚀 Powered by Supabase for data storage
+- ⚡ Built with Next.js 15 for optimal performance
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- **Frontend**: Next.js 15, React 18, TypeScript
+- **Styling**: Tailwind CSS, Shadcn UI
+- **Database**: Supabase (PostgreSQL)
+- **Deployment**: Vercel
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/5e6a9b0d-dcb5-4a63-af5b-b44580bbc462) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js 20.x or later
+- npm or yarn
+- Supabase account
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. Clone the repository:
+```bash
+git clone <your-repo-url>
+cd tube-tide-online
+```
 
-Follow these steps:
+2. Install dependencies:
+```bash
+npm install
+```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+3. Set up environment variables:
+```bash
+cp .env.local.example .env.local
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+4. Update `.env.local` with your Supabase credentials:
+```
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+ADMIN_EMAIL=your_admin_email
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
+5. Set up the database:
+   - Go to your Supabase project dashboard
+   - Navigate to SQL Editor
+   - Execute the SQL from `/supabase/schema.sql`
+   - (Optional) Execute sample data from `/supabase/sample-data.sql`
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+6. Run the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Project Structure
 
-**Use GitHub Codespaces**
+```
+├── app/                    # Next.js app directory
+│   ├── admin/             # Admin panel pages
+│   ├── components/        # Reusable components
+│   ├── lib/              # Utilities and libraries
+│   └── types/            # TypeScript type definitions
+├── public/               # Static assets
+├── supabase/            # Database schema and migrations
+└── ...config files
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Admin Panel
 
-## What technologies are used for this project?
+Access the admin panel at `/admin` to:
+- Manage projects (create, edit, delete)
+- Update profile information
+- Control featured projects
+- Organize project order
 
-This project is built with:
+## Deployment
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Vercel
 
-## How can I deploy this project?
+1. Push your code to GitHub
+2. Import the project in Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy!
 
-Simply open [Lovable](https://lovable.dev/projects/5e6a9b0d-dcb5-4a63-af5b-b44580bbc462) and click on Share -> Publish.
+## Environment Variables
 
-## Can I connect a custom domain to my Lovable project?
+Required environment variables for production:
 
-Yes, you can!
+- `NEXT_PUBLIC_SUPABASE_URL` - Your Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Supabase anonymous key
+- `SUPABASE_SERVICE_ROLE_KEY` - Supabase service role key
+- `ADMIN_EMAIL` - Admin email for authentication
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## License
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is private and proprietary.
