@@ -1,17 +1,3 @@
-export interface LiveStream {
-  id: string
-  title: string
-  description: string
-  thumbnail: string
-  embedUrl: string
-  platform: 'youtube' | 'twitch' | 'other'
-  date: string
-  duration: string
-  views: number
-  tags: string[]
-  featured?: boolean
-}
-
 export interface Project {
   id: string
   title: string

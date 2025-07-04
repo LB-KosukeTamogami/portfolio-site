@@ -1,4 +1,4 @@
-import { LiveStream, Project, Skill, Profile } from '@/app/types'
+import { Project, Skill, Profile } from '@/app/types'
 
 export const profile: Profile = {
   name: 'Your Name',
@@ -13,46 +13,6 @@ export const profile: Profile = {
   email: 'contact@example.com'
 }
 
-export const liveStreams: LiveStream[] = [
-  {
-    id: '1',
-    title: 'Building a Real-time Chat App with Next.js',
-    description: 'Live coding session where we build a real-time chat application using Next.js, Socket.io, and Tailwind CSS',
-    thumbnail: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=450&fit=crop',
-    embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    platform: 'youtube',
-    date: '2024-12-25',
-    duration: '2:30:00',
-    views: 1500,
-    tags: ['Next.js', 'Socket.io', 'Tailwind CSS', 'TypeScript'],
-    featured: true
-  },
-  {
-    id: '2',
-    title: 'React Performance Optimization Tips',
-    description: 'Deep dive into React performance optimization techniques including memo, useMemo, and useCallback',
-    thumbnail: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=800&h=450&fit=crop',
-    embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    platform: 'youtube',
-    date: '2024-12-20',
-    duration: '1:45:00',
-    views: 2300,
-    tags: ['React', 'Performance', 'JavaScript'],
-    featured: true
-  },
-  {
-    id: '3',
-    title: 'Docker & Kubernetes for Frontend Developers',
-    description: 'Introduction to containerization and orchestration for frontend developers',
-    thumbnail: 'https://images.unsplash.com/photo-1605745341112-85968b19335b?w=800&h=450&fit=crop',
-    embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    platform: 'youtube',
-    date: '2024-12-15',
-    duration: '2:00:00',
-    views: 890,
-    tags: ['Docker', 'Kubernetes', 'DevOps']
-  },
-]
 
 export const projects: Project[] = [
   {
