@@ -1,5 +1,5 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "portfolio-site",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,10 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "dev:vite": "vite",
-    "build:vite": "vite build",
-    "preview:vite": "vite preview"
+    "lint": "next lint"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

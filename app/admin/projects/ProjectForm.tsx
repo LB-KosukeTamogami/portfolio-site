@@ -69,8 +69,8 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
 
       router.push('/admin/projects')
       router.refresh()
-    } catch (error: any) {
-      alert('Error saving project: ' + error.message)
+    } catch (error: unknown) {
+      alert('Error saving project: ' + (error instanceof Error ? error.message : 'Unknown error'))
     } finally {
       setLoading(false)
     }
@@ -115,7 +115,7 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
           </label>
           <select
             value={formData.category}
-            onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
+            onChange={(e) => setFormData({ ...formData, category: e.target.value as ProjectFormData['category'] })}
             className="w-full px-3 py-2 bg-youtube-dark border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
           >
             <option value="homepage">ホームページ</option>
@@ -131,7 +131,7 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
           </label>
           <select
             value={formData.status}
-            onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
+            onChange={(e) => setFormData({ ...formData, status: e.target.value as ProjectFormData['status'] })}
             className="w-full px-3 py-2 bg-youtube-dark border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
           >
             <option value="planned">Planned</option>
