@@ -12,9 +12,15 @@ interface ProfileCardProps {
     twitter_url?: string
     linkedin_url?: string
   }
+  categoryStats?: {
+    homepage: number
+    'landing-page': number
+    'web-app': number
+    'mobile-app': number
+  }
 }
 
-export default function ProfileCard({ profile }: ProfileCardProps) {
+export default function ProfileCard({ profile, categoryStats }: ProfileCardProps) {
   const defaultProfile = {
     name: "LandBridge株式会社",
     title: "バイブコーディング開発実績",
@@ -60,23 +66,23 @@ export default function ProfileCard({ profile }: ProfileCardProps) {
 
         <div className="md:w-1/3">
           <div className="bg-black/30 backdrop-blur-sm rounded-lg p-6 border border-white/10">
-            <h3 className="font-semibold mb-4 text-gray-200">開発実績カテゴリ</h3>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start">
-                <span className="text-blue-400 mr-2 mt-1">▸</span>
-                <span className="text-gray-300">コーポレートサイト・ホームページ</span>
+            <h3 className="font-semibold mb-4 text-gray-200">開発実績</h3>
+            <ul className="space-y-3">
+              <li className="flex items-center justify-between">
+                <span className="text-gray-300 text-sm">コーポレートサイト</span>
+                <span className="text-2xl font-bold text-blue-400">{categoryStats?.homepage || 0}</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-purple-400 mr-2 mt-1">▸</span>
-                <span className="text-gray-300">ランディングページ・キャンペーンサイト</span>
+              <li className="flex items-center justify-between">
+                <span className="text-gray-300 text-sm">ランディングページ</span>
+                <span className="text-2xl font-bold text-purple-400">{categoryStats?.['landing-page'] || 0}</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-indigo-400 mr-2 mt-1">▸</span>
-                <span className="text-gray-300">Webアプリケーション・システム開発</span>
+              <li className="flex items-center justify-between">
+                <span className="text-gray-300 text-sm">Webアプリケーション</span>
+                <span className="text-2xl font-bold text-indigo-400">{categoryStats?.['web-app'] || 0}</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-blue-400 mr-2 mt-1">▸</span>
-                <span className="text-gray-300">モバイルアプリケーション開発</span>
+              <li className="flex items-center justify-between">
+                <span className="text-gray-300 text-sm">モバイルアプリ</span>
+                <span className="text-2xl font-bold text-blue-400">{categoryStats?.['mobile-app'] || 0}</span>
               </li>
             </ul>
           </div>

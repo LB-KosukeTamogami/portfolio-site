@@ -36,35 +36,7 @@ export default async function HomePage() {
     <MainLayout>
       <div className="p-6 pt-2">
         {/* Profile Card */}
-        <ProfileCard profile={profiles} />
-        
-        {/* Stats Section */}
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-youtube-gray rounded-lg p-6 text-center">
-            <div className="text-3xl font-bold text-blue-600 mb-2">
-              {categoryStats['homepage']}
-            </div>
-            <div className="text-muted-foreground">ホームページ</div>
-          </div>
-          <div className="bg-youtube-gray rounded-lg p-6 text-center">
-            <div className="text-3xl font-bold text-blue-600 mb-2">
-              {categoryStats['landing-page']}
-            </div>
-            <div className="text-muted-foreground">ランディングページ</div>
-          </div>
-          <div className="bg-youtube-gray rounded-lg p-6 text-center">
-            <div className="text-3xl font-bold text-blue-600 mb-2">
-              {categoryStats['web-app']}
-            </div>
-            <div className="text-muted-foreground">Webアプリケーション</div>
-          </div>
-          <div className="bg-youtube-gray rounded-lg p-6 text-center">
-            <div className="text-3xl font-bold text-blue-600 mb-2">
-              {categoryStats['mobile-app']}
-            </div>
-            <div className="text-muted-foreground">モバイルアプリケーション</div>
-          </div>
-        </section>
+        <ProfileCard profile={profiles} categoryStats={categoryStats} />
 
         {/* Featured Projects */}
         <section className="mb-8">
