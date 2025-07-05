@@ -94,7 +94,7 @@ export default async function AdminPage() {
               <div className="text-3xl font-bold text-pink-400">
                 {projects.filter(p => p.category === 'landing-page').length}
               </div>
-              <div className="text-sm text-gray-400">LP</div>
+              <div className="text-sm text-gray-400">ランディングページ</div>
             </div>
             <div className="bg-youtube-gray rounded-lg p-6">
               <div className="text-3xl font-bold text-cyan-400">
@@ -106,7 +106,7 @@ export default async function AdminPage() {
               <div className="text-3xl font-bold text-green-400">
                 {projects.filter(p => p.category === 'mobile-app').length}
               </div>
-              <div className="text-sm text-gray-400">モバイル</div>
+              <div className="text-sm text-gray-400">モバイルアプリ</div>
             </div>
           </div>
 
