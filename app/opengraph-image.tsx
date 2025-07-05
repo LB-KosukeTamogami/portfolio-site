@@ -17,113 +17,97 @@ export default async function Image() {
           width: '100%',
           height: '100%',
           display: 'flex',
-          flexDirection: 'column',
-          background: 'linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%)',
           position: 'relative',
+          backgroundColor: '#0f0f0f',
         }}
       >
-        {/* Background pattern */}
+        {/* グラデーション背景 - ProfileCardと同じデザイン */}
         <div
           style={{
             position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundImage: `
-              radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-              radial-gradient(circle at 80% 50%, rgba(147, 51, 234, 0.1) 0%, transparent 50%)
-            `,
+            inset: 0,
+            background: 'linear-gradient(to bottom right, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.2), rgba(99, 102, 241, 0.2))',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to top right, transparent, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1))',
           }}
         />
         
-        {/* Content */}
+        {/* コンテンツ */}
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            padding: '80px',
+            width: '100%',
             height: '100%',
             position: 'relative',
             zIndex: 10,
           }}
         >
-          {/* Logo/Company Name */}
-          <div
+          {/* メインタイトル */}
+          <h1
             style={{
-              fontSize: 36,
+              fontSize: 80,
               fontWeight: 'bold',
-              color: '#3b82f6',
-              marginBottom: 24,
+              margin: 0,
+              marginBottom: 32,
+              background: 'linear-gradient(to right, #60a5fa, #a78bfa)',
+              backgroundClip: 'text',
+              color: 'transparent',
               letterSpacing: '0.05em',
             }}
           >
             LandBridge株式会社
-          </div>
-          
-          {/* Main Title */}
-          <h1
-            style={{
-              fontSize: 64,
-              fontWeight: 'bold',
-              color: 'white',
-              margin: 0,
-              textAlign: 'center',
-              lineHeight: 1.2,
-              marginBottom: 16,
-            }}
-          >
-            Web制作・アプリ開発の
-          </h1>
-          <h1
-            style={{
-              fontSize: 64,
-              fontWeight: 'bold',
-              color: 'white',
-              margin: 0,
-              textAlign: 'center',
-              lineHeight: 1.2,
-              marginBottom: 32,
-            }}
-          >
-            実績紹介
           </h1>
           
-          {/* Description */}
+          {/* サブタイトル */}
           <p
             style={{
-              fontSize: 24,
-              color: '#94a3b8',
+              fontSize: 48,
+              color: '#e2e8f0',
               margin: 0,
-              textAlign: 'center',
-              marginBottom: 48,
+              fontWeight: '500',
             }}
           >
-            最新技術で課題解決をサポート
+            ポートフォリオサイト
           </p>
           
-          {/* Stats */}
+          {/* 装飾的な要素 */}
           <div
             style={{
               display: 'flex',
-              gap: 60,
-              marginTop: 32,
+              gap: 40,
+              marginTop: 60,
+              opacity: 0.6,
             }}
           >
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 48, fontWeight: 'bold', color: '#3b82f6' }}>15+</div>
-              <div style={{ fontSize: 18, color: '#94a3b8', marginTop: 8 }}>開発実績</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 48, fontWeight: 'bold', color: '#8b5cf6' }}>4</div>
-              <div style={{ fontSize: 18, color: '#94a3b8', marginTop: 8 }}>サービス領域</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 48, fontWeight: 'bold', color: '#10b981' }}>100%</div>
-              <div style={{ fontSize: 18, color: '#94a3b8', marginTop: 8 }}>満足度</div>
-            </div>
+            <div
+              style={{
+                width: 100,
+                height: 3,
+                background: 'linear-gradient(to right, transparent, #60a5fa, transparent)',
+              }}
+            />
+            <div
+              style={{
+                width: 100,
+                height: 3,
+                background: 'linear-gradient(to right, transparent, #a78bfa, transparent)',
+              }}
+            />
+            <div
+              style={{
+                width: 100,
+                height: 3,
+                background: 'linear-gradient(to right, transparent, #818cf8, transparent)',
+              }}
+            />
           </div>
         </div>
       </div>
