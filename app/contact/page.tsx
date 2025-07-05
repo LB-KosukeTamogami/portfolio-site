@@ -17,13 +17,31 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitMessage('')
     
-    // ここでは仮の送信処理
-    setTimeout(() => {
-      setSubmitMessage('お問い合わせありがとうございます。内容を確認次第、ご連絡させていただきます。')
-      setFormData({ name: '', company: '', email: '', message: '' })
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const result = await response.json()
+
+      if (response.ok) {
+        setSubmitMessage('お問い合わせありがとうございます。内容を確認次第、ご連絡させていただきます。')
+        setFormData({ name: '', company: '', email: '', message: '' })
+      } else {
+        setSubmitMessage(result.error || 'エラーが発生しました。もう一度お試しください。')
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      setSubmitMessage('通信エラーが発生しました。もう一度お試しください。')
+    } finally {
       setIsSubmitting(false)
-    }, 1000)
+    }
   }
 
   return (
@@ -111,9 +129,15 @@ export default function ContactPage() {
             </div>
             
             {submitMessage && (
-              <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4 text-green-400 text-center">
+              <div className={`${
+                submitMessage.includes('エラー') 
+                  ? 'bg-red-900/20 border-red-500/30 text-red-400' 
+                  : 'bg-green-900/20 border-green-500/30 text-green-400'
+              } border rounded-lg p-4 text-center`}>
                 <div className="flex items-center justify-center gap-2">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className={`w-2 h-2 ${
+                    submitMessage.includes('エラー') ? 'bg-red-400' : 'bg-green-400'
+                  } rounded-full animate-pulse`}></div>
                   {submitMessage}
                 </div>
               </div>
