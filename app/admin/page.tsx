@@ -78,28 +78,40 @@ export default async function AdminPage() {
       ) : (
         <div className="space-y-6">
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
             <div className="bg-youtube-gray rounded-lg p-6">
               <div className="text-3xl font-bold text-blue-400">{projects.length}</div>
-              <div className="text-sm text-gray-400">総プロジェクト数</div>
-            </div>
-            <div className="bg-youtube-gray rounded-lg p-6">
-              <div className="text-3xl font-bold text-green-400">
-                {projects.filter(p => p.status === 'completed').length}
-              </div>
-              <div className="text-sm text-gray-400">完了済み</div>
+              <div className="text-sm text-gray-400">総プロジェクト</div>
             </div>
             <div className="bg-youtube-gray rounded-lg p-6">
               <div className="text-3xl font-bold text-yellow-400">
-                {projects.filter(p => p.status === 'in-progress').length}
+                {projects.filter(p => p.featured).length}
               </div>
-              <div className="text-sm text-gray-400">進行中</div>
+              <div className="text-sm text-gray-400">注目</div>
             </div>
             <div className="bg-youtube-gray rounded-lg p-6">
               <div className="text-3xl font-bold text-purple-400">
-                {projects.filter(p => p.featured).length}
+                {projects.filter(p => p.category === 'homepage').length}
               </div>
-              <div className="text-sm text-gray-400">注目プロジェクト</div>
+              <div className="text-sm text-gray-400">ホームページ</div>
+            </div>
+            <div className="bg-youtube-gray rounded-lg p-6">
+              <div className="text-3xl font-bold text-pink-400">
+                {projects.filter(p => p.category === 'landing-page').length}
+              </div>
+              <div className="text-sm text-gray-400">LP</div>
+            </div>
+            <div className="bg-youtube-gray rounded-lg p-6">
+              <div className="text-3xl font-bold text-cyan-400">
+                {projects.filter(p => p.category === 'web-app').length}
+              </div>
+              <div className="text-sm text-gray-400">Webアプリ</div>
+            </div>
+            <div className="bg-youtube-gray rounded-lg p-6">
+              <div className="text-3xl font-bold text-green-400">
+                {projects.filter(p => p.category === 'mobile-app').length}
+              </div>
+              <div className="text-sm text-gray-400">モバイル</div>
             </div>
           </div>
 
