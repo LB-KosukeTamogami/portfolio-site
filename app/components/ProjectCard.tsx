@@ -22,8 +22,25 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
     'mobile-app': 'モバイルアプリ'
   }
 
+  const handleCardClick = () => {
+    if (project.live_url) {
+      window.open(project.live_url, '_blank', 'noopener,noreferrer')
+    }
+  }
+
   return (
-    <div className="video-card group">
+    <div 
+      className={`video-card group ${project.live_url ? 'cursor-pointer hover:scale-105 transition-transform duration-200' : ''}`}
+      onClick={handleCardClick}
+      role={project.live_url ? "button" : undefined}
+      tabIndex={project.live_url ? 0 : undefined}
+      onKeyDown={(e) => {
+        if ((e.key === 'Enter' || e.key === ' ') && project.live_url) {
+          handleCardClick()
+        }
+      }}
+      title={project.live_url ? "クリックしてサイトを見る" : undefined}
+    >
       <div className="relative">
         <div className="aspect-video relative overflow-hidden">
           <Image
@@ -42,16 +59,14 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             Featured
           </div>
         )}
-        {project.demo && (
+        {project.live_url && (
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
+            <div
               className="p-3 bg-white/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
+              onClick={(e) => e.stopPropagation()}
             >
               <ExternalLink className="w-6 h-6 text-black" />
-            </a>
+            </div>
           </div>
         )}
       </div>
