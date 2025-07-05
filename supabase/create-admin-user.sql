@@ -1,21 +1,14 @@
--- Supabaseの管理ダッシュボードで実行するSQL
--- Authentication > Users に手動でユーザーを作成することもできます
+-- 管理者ユーザーを作成するためのSQL
+-- 注意: これはSupabaseのダッシュボードで実行する必要があります
+-- または、Supabase CLIを使用してローカルで実行できます
 
--- 以下の情報で管理者ユーザーを作成してください：
+-- 管理者ユーザーの作成
+-- Supabaseダッシュボードで以下の情報を使用してユーザーを作成してください：
 -- Email: admin@portfolio.com
 -- Password: Portfolio2024!
 
--- SQLでユーザーを作成する場合（Supabase管理画面のSQL Editorで実行）
--- 注意: この方法は開発環境でのみ使用してください
+-- 以下のSQLは参考用です。Supabaseでは直接SQLでユーザーを作成することはできません。
+-- 代わりに、Supabaseダッシュボードの Authentication > Users から作成してください。
 
-/*
--- プロファイルテーブルに管理者情報を追加
-INSERT INTO profiles (id, username, full_name, created_at, updated_at)
-VALUES (
-  'YOUR_USER_ID_HERE', -- Supabaseでユーザー作成後に取得したIDを入力
-  'admin',
-  'Portfolio Admin',
-  NOW(),
-  NOW()
-);
-*/
+-- または、Supabase CLIを使用する場合:
+-- supabase auth admin create-user --email "admin@portfolio.com" --password "Portfolio2024!"
