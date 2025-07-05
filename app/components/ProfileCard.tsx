@@ -77,7 +77,7 @@ export default function ProfileCard({ profile, categoryStats }: ProfileCardProps
                 <span className="text-2xl font-bold text-purple-400 w-10 text-right tabular-nums">{categoryStats?.['landing-page'] || 0}</span>
               </li>
               <li className="flex items-center justify-between">
-                <span className="text-gray-300 text-sm">Webアプリケーション</span>
+                <span className="text-gray-300 text-sm">Webアプリ</span>
                 <span className="text-2xl font-bold text-indigo-400 w-10 text-right tabular-nums">{categoryStats?.['web-app'] || 0}</span>
               </li>
               <li className="flex items-center justify-between">

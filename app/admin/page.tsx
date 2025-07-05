@@ -1,6 +1,6 @@
 import { createClient } from '@/app/lib/supabase/server'
 import Link from 'next/link'
-import { Plus, Edit, Trash2, ExternalLink, FolderOpen, Eye } from 'lucide-react'
+import { Plus, Edit, Trash2, ExternalLink, FolderOpen, Eye, Clock } from 'lucide-react'
 import Image from 'next/image'
 import DeleteProjectButton from './projects/DeleteProjectButton'
 
@@ -26,15 +26,10 @@ export default async function AdminPage() {
   const categoryLabels = {
     'homepage': 'ホームページ',
     'landing-page': 'ランディングページ',
-    'web-app': 'Webアプリケーション',
-    'mobile-app': 'モバイルアプリケーション'
+    'web-app': 'Webアプリ',
+    'mobile-app': 'モバイルアプリ'
   }
 
-  const statusColors = {
-    completed: 'bg-green-600',
-    'in-progress': 'bg-yellow-600',
-    planned: 'bg-gray-600'
-  }
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -126,34 +121,42 @@ export default async function AdminPage() {
                     fill
                     className="object-cover"
                   />
+                  <div className={`absolute top-2 right-2 ${categoryColors[project.category]} text-white text-xs px-2 py-1 rounded`}>
+                    {categoryLabels[project.category]}
+                  </div>
                   {project.featured && (
-                    <div className="absolute top-2 right-2 bg-yellow-500 text-black px-2 py-1 rounded text-xs font-semibold">
-                      注目
+                    <div className="absolute top-2 left-2 bg-blue-600 text-white text-xs px-2 py-1 rounded">
+                      Featured
                     </div>
                   )}
                 </div>
                 
-                <div className="p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className={`${categoryColors[project.category]} text-white text-xs px-2 py-1 rounded`}>
-                      {categoryLabels[project.category]}
-                    </span>
-                    <span className={`${statusColors[project.status]} text-white text-xs px-2 py-1 rounded`}>
-                      {project.status}
-                    </span>
-                  </div>
-                  
-                  <h3 className="font-semibold mb-2 group-hover:text-blue-400 transition-colors">
+                <div className="p-3">
+                  <h3 className="font-medium text-sm leading-5 line-clamp-2 mb-1 group-hover:text-white transition-colors">
                     {project.title}
                   </h3>
                   
-                  <p className="text-sm text-gray-400 mb-3 line-clamp-2">
+                  <p className="text-xs text-muted-foreground line-clamp-2 mb-2">
                     {project.description}
                   </p>
                   
+                  <div className="flex flex-wrap gap-1 mb-2">
+                    {project.technologies.slice(0, 3).map((tech) => (
+                      <span key={tech} className="text-xs bg-youtube-dark px-2 py-0.5 rounded">
+                        {tech}
+                      </span>
+                    ))}
+                    {project.technologies.length > 3 && (
+                      <span className="text-xs text-muted-foreground">
+                        +{project.technologies.length - 3}
+                      </span>
+                    )}
+                  </div>
+                  
                   <div className="flex items-center justify-between">
-                    <div className="text-xs text-gray-500">
-                      {project.duration && `開発期間: ${project.duration}`}
+                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <Clock className="w-3 h-3" />
+                      <span>開発期間: {project.duration}</span>
                     </div>
                     
                     <div className="flex items-center gap-2">

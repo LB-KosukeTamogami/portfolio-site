@@ -18,8 +18,8 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
   const categoryLabels = {
     'homepage': 'ホームページ',
     'landing-page': 'ランディングページ',
-    'web-app': 'Web App',
-    'mobile-app': 'Mobile App'
+    'web-app': 'Webアプリ',
+    'mobile-app': 'モバイルアプリ'
   }
 
   return (

@@ -9,8 +9,8 @@ const categories = [
   { id: 'all', label: 'すべて' },
   { id: 'homepage', label: 'ホームページ' },
   { id: 'landing-page', label: 'ランディングページ' },
-  { id: 'web-app', label: 'Webアプリケーション' },
-  { id: 'mobile-app', label: 'モバイルアプリケーション' },
+  { id: 'web-app', label: 'Webアプリ' },
+  { id: 'mobile-app', label: 'モバイルアプリ' },
 ]
 
 interface ProjectsClientProps {

@@ -169,8 +169,8 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
           >
             <option value="homepage">ホームページ</option>
             <option value="landing-page">ランディングページ</option>
-            <option value="web-app">Webアプリケーション</option>
-            <option value="mobile-app">モバイルアプリケーション</option>
+            <option value="web-app">Webアプリ</option>
+            <option value="mobile-app">モバイルアプリ</option>
           </select>
         </div>
 
