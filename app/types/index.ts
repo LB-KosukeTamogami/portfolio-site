@@ -3,11 +3,9 @@ export interface Project {
   title: string
   description: string
   thumbnail: string
-  github?: string
   demo?: string
   technologies: string[]
   featured?: boolean
-  status: 'completed' | 'in-progress' | 'planned'
   category: 'homepage' | 'landing-page' | 'web-app' | 'mobile-app'
   duration: string
 }

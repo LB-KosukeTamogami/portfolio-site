@@ -3,18 +3,17 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/app/lib/supabase/client'
-import { Save, X } from 'lucide-react'
+import { Save, X, Upload } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface ProjectFormData {
   title: string
   description: string
   thumbnail: string
   live_url: string
-  github_url: string
   technologies: string[]
   featured: boolean
-  status: 'completed' | 'in-progress' | 'planned'
   category: 'homepage' | 'landing-page' | 'web-app' | 'mobile-app'
   duration: string
   order: number
@@ -30,31 +29,80 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
   const supabase = createClient()
   const [loading, setLoading] = useState(false)
   const [techInput, setTechInput] = useState('')
+  const [uploading, setUploading] = useState(false)
+  const [thumbnailFile, setThumbnailFile] = useState<File | null>(null)
+  const [thumbnailPreview, setThumbnailPreview] = useState<string>(initialData?.thumbnail || '')
   
   const [formData, setFormData] = useState<ProjectFormData>({
     title: initialData?.title || '',
     description: initialData?.description || '',
     thumbnail: initialData?.thumbnail || '',
     live_url: initialData?.live_url || '',
-    github_url: initialData?.github_url || '',
     technologies: initialData?.technologies || [],
     featured: initialData?.featured || false,
-    status: initialData?.status || 'planned',
     category: initialData?.category || 'web-app',
     duration: initialData?.duration || '',
     order: initialData?.order || 0,
   })
+
+  const handleThumbnailChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setThumbnailFile(file)
+    
+    // Create preview
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      setThumbnailPreview(e.target?.result as string)
+    }
+    reader.readAsDataURL(file)
+  }
+
+  const uploadThumbnail = async (file: File): Promise<string> => {
+    const fileExt = file.name.split('.').pop()
+    const fileName = `${Math.random()}.${fileExt}`
+    const filePath = `${fileName}`
+
+    const { error: uploadError, data } = await supabase.storage
+      .from('project-thumbnails')
+      .upload(filePath, file)
+
+    if (uploadError) {
+      throw uploadError
+    }
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('project-thumbnails')
+      .getPublicUrl(filePath)
+
+    return publicUrl
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
 
     try {
+      let thumbnailUrl = formData.thumbnail
+
+      // Upload new thumbnail if selected
+      if (thumbnailFile) {
+        setUploading(true)
+        thumbnailUrl = await uploadThumbnail(thumbnailFile)
+        setUploading(false)
+      }
+
+      const projectData = {
+        ...formData,
+        thumbnail: thumbnailUrl
+      }
+
       if (projectId) {
         // Update existing project
         const { error } = await supabase
           .from('projects')
-          .update(formData)
+          .update(projectData)
           .eq('id', projectId)
 
         if (error) throw error
@@ -62,7 +110,7 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
         // Create new project
         const { error } = await supabase
           .from('projects')
-          .insert([formData])
+          .insert([projectData])
 
         if (error) throw error
       }
@@ -73,6 +121,7 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
       alert('Error saving project: ' + (error instanceof Error ? error.message : 'Unknown error'))
     } finally {
       setLoading(false)
+      setUploading(false)
     }
   }
 
@@ -127,21 +176,6 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
 
         <div>
           <label className="block text-sm font-medium mb-2">
-            ステータス
-          </label>
-          <select
-            value={formData.status}
-            onChange={(e) => setFormData({ ...formData, status: e.target.value as ProjectFormData['status'] })}
-            className="w-full px-3 py-2 bg-youtube-dark border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-          >
-            <option value="planned">Planned</option>
-            <option value="in-progress">In Progress</option>
-            <option value="completed">Completed</option>
-          </select>
-        </div>
-        
-        <div>
-          <label className="block text-sm font-medium mb-2">
             開発期間
           </label>
           <input
@@ -169,44 +203,57 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
 
       <div>
         <label className="block text-sm font-medium mb-2">
-          サムネイルURL *
+          サムネイル画像 *
+        </label>
+        <div className="space-y-4">
+          {thumbnailPreview && (
+            <div className="relative w-full max-w-md">
+              <Image
+                src={thumbnailPreview}
+                alt="サムネイルプレビュー"
+                width={400}
+                height={225}
+                className="rounded-lg border border-border"
+              />
+            </div>
+          )}
+          <div className="flex items-center gap-4">
+            <label className="cursor-pointer">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleThumbnailChange}
+                className="hidden"
+                required={!formData.thumbnail}
+              />
+              <div className="flex items-center gap-2 bg-youtube-gray hover:bg-youtube-dark px-4 py-2 rounded-lg transition-colors">
+                <Upload className="h-5 w-5" />
+                {thumbnailFile ? '画像を変更' : '画像を選択'}
+              </div>
+            </label>
+            {thumbnailFile && (
+              <span className="text-sm text-muted-foreground">
+                {thumbnailFile.name}
+              </span>
+            )}
+          </div>
+          {uploading && (
+            <p className="text-sm text-muted-foreground">アップロード中...</p>
+          )}
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-2">
+          サイトURL
         </label>
         <input
           type="url"
-          value={formData.thumbnail}
-          onChange={(e) => setFormData({ ...formData, thumbnail: e.target.value })}
+          value={formData.live_url}
+          onChange={(e) => setFormData({ ...formData, live_url: e.target.value })}
           className="w-full px-3 py-2 bg-youtube-dark border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-          placeholder="https://example.com/image.jpg"
-          required
+          placeholder="https://example.com"
         />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="block text-sm font-medium mb-2">
-            サイトURL
-          </label>
-          <input
-            type="url"
-            value={formData.live_url}
-            onChange={(e) => setFormData({ ...formData, live_url: e.target.value })}
-            className="w-full px-3 py-2 bg-youtube-dark border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-            placeholder="https://example.com"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-2">
-            GitHub URL
-          </label>
-          <input
-            type="url"
-            value={formData.github_url}
-            onChange={(e) => setFormData({ ...formData, github_url: e.target.value })}
-            className="w-full px-3 py-2 bg-youtube-dark border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-            placeholder="https://github.com/username/repo"
-          />
-        </div>
       </div>
 
       <div>

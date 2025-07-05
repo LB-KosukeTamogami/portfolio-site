@@ -18,10 +18,8 @@ export interface Database {
           description: string
           thumbnail: string
           live_url: string | null
-          github_url: string | null
           technologies: string[]
           featured: boolean
-          status: 'completed' | 'in-progress' | 'planned'
           category: 'hp-lp' | 'web-app' | 'mobile-app'
           order: number
         }
@@ -33,10 +31,8 @@ export interface Database {
           description: string
           thumbnail: string
           live_url?: string | null
-          github_url?: string | null
           technologies?: string[]
           featured?: boolean
-          status?: 'completed' | 'in-progress' | 'planned'
           category?: 'hp-lp' | 'web-app' | 'mobile-app'
           order?: number
         }
@@ -48,10 +44,8 @@ export interface Database {
           description?: string
           thumbnail?: string
           live_url?: string | null
-          github_url?: string | null
           technologies?: string[]
           featured?: boolean
-          status?: 'completed' | 'in-progress' | 'planned'
           category?: 'hp-lp' | 'web-app' | 'mobile-app'
           order?: number
         }
@@ -108,7 +102,6 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      project_status: 'completed' | 'in-progress' | 'planned'
     }
     CompositeTypes: {
       [_ in never]: never
