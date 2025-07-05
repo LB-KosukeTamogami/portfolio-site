@@ -6,6 +6,15 @@ export async function updateSession(request: NextRequest) {
     request,
   })
 
+  const pathname = request.nextUrl.pathname
+  console.log(`[Middleware] Processing request for: ${pathname}`)
+
+  // Skip authentication check for login page and debug page
+  if (pathname === '/login' || pathname === '/login/debug') {
+    console.log(`[Middleware] Skipping auth check for: ${pathname}`)
+    return supabaseResponse
+  }
+
   // Development environment - skip authentication for admin panel
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
     console.warn('Supabase environment variables not set - skipping authentication')
@@ -41,14 +50,11 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (
-    !user &&
-    request.nextUrl.pathname.startsWith('/admin') &&
-    !request.nextUrl.pathname.startsWith('/admin/login')
-  ) {
+  if (!user && pathname.startsWith('/admin')) {
+    console.log(`[Middleware] No user found for admin route: ${pathname}, redirecting to login`)
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone()
-    url.pathname = '/admin/login'
+    url.pathname = '/login'
     return NextResponse.redirect(url)
   }
 

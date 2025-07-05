@@ -11,6 +11,18 @@ export default function LoginForm() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  
+  // Check if environment variables are set
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return (
+      <div className="bg-red-900/20 border border-red-900 rounded-lg p-4 text-sm text-red-400">
+        <p className="font-semibold mb-2">環境変数エラー</p>
+        <p>Supabaseの環境変数が設定されていません。</p>
+        <p className="text-xs mt-2">本番環境で環境変数を設定してください。</p>
+      </div>
+    )
+  }
+  
   const supabase = createClient()
 
   const handleLogin = async (e: React.FormEvent) => {

@@ -18,7 +18,7 @@ export default async function AdminLayout({
 
   if (!user) {
     console.log('No user found, redirecting to login')
-    redirect('/admin/login')
+    redirect('/login')
   }
 
   return (

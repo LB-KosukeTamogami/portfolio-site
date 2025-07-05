@@ -4,8 +4,8 @@
 
 管理画面にアクセスするためのログイン情報：
 
-- **URL**: http://localhost:3000/admin/login (開発環境)
-- **本番URL**: https://portfolio-site-blond-eta.vercel.app/admin/login
+- **URL**: http://localhost:3000/login (開発環境)
+- **本番URL**: https://portfolio-site-blond-eta.vercel.app/login
 
 ### オプション1（推奨 - .env.localと一致）
 - **メールアドレス**: `tamogami@landbridge.co.jp`
