@@ -1,6 +1,6 @@
 {
   "name": "LandBridge Portfolio",
-  "short_name": "Portfolio",
+  "short_name": "LandBridge",
   "description": "LandBridge株式会社のポートフォリオサイト",
   "start_url": "/",
   "display": "standalone",

@@ -11,10 +11,20 @@ export const metadata: Metadata = {
   authors: [{ name: 'LandBridge株式会社' }],
   icons: {
     icon: [
+      { url: '/favicon.ico', type: 'image/x-icon' },
       { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: [
+      { url: '/favicon.ico' },
     ],
     apple: [
       { url: '/favicon.svg' },
+    ],
+    other: [
+      {
+        rel: 'apple-touch-icon-precomposed',
+        url: '/favicon.svg',
+      },
     ],
   },
   manifest: '/manifest.json',
