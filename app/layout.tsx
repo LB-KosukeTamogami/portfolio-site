@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     siteName: 'LandBridge Portfolio',
     images: [
       {
-        url: '/opengraph-image',
+        url: 'https://portfolio-site-blond-eta.vercel.app/api/og',
         width: 1200,
         height: 630,
         alt: 'LandBridge Portfolio',
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'LandBridge株式会社 | Web制作・アプリ開発',
     description: '最新技術を活用したWeb制作・アプリ開発。企業サイト、LP、システム開発まで幅広く対応。無料相談受付中。',
-    images: ['/opengraph-image'],
+    images: ['https://portfolio-site-blond-eta.vercel.app/api/og'],
     creator: '@landbridge_jp',
   },
 }
@@ -67,11 +67,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ja">
+    <html lang="ja" className="bg-youtube-dark">
       <head>
         <StructuredData />
+        <meta name="theme-color" content="#0f0f0f" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} bg-youtube-dark`}>{children}</body>
     </html>
   )
 }
