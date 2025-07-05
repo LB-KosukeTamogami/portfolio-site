@@ -1,5 +1,6 @@
 import MainLayout from './components/MainLayout'
 import ProjectCard from './components/ProjectCard'
+import ProfileCard from './components/ProfileCard'
 import { createClient } from '@/app/lib/supabase/server'
 import { ArrowRight, FolderOpen } from 'lucide-react'
 import Link from 'next/link'
@@ -12,6 +13,13 @@ export default async function HomePage() {
     .from('projects')
     .select('*')
     .order('order', { ascending: true })
+  
+  // Fetch profile from Supabase
+  const { data: profiles } = await supabase
+    .from('profiles')
+    .select('*')
+    .limit(1)
+    .single()
   
   const allProjects = projects || []
   const featuredProjects = allProjects.filter(p => p.featured)
@@ -27,6 +35,9 @@ export default async function HomePage() {
   return (
     <MainLayout>
       <div className="p-6 pt-2">
+        {/* Profile Card */}
+        <ProfileCard profile={profiles} />
+        
         {/* Stats Section */}
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="bg-youtube-gray rounded-lg p-6 text-center">

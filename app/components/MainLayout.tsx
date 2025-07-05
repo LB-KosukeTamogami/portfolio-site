@@ -9,7 +9,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     <div className="min-h-screen bg-youtube-dark text-foreground">
       <Header />
       <Sidebar />
-      <main className="pt-16 ml-60">
+      <main className="pt-16 ml-0 md:ml-60">
         {children}
       </main>
       <ContactButton />

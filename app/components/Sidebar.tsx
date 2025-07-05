@@ -16,7 +16,7 @@ const Sidebar = () => {
 
 
   return (
-    <aside className="fixed left-0 top-16 h-full w-60 bg-youtube-dark border-r border-border z-40 overflow-y-auto">
+    <aside className="fixed left-0 top-16 h-full w-60 bg-youtube-dark border-r border-border z-40 overflow-y-auto hidden md:block">
       <div className="py-4">
         <div className="space-y-1 px-3">
           {menuItems.map((item) => {
