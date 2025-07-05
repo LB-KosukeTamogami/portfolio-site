@@ -4,12 +4,12 @@ import { createClient } from '@/app/lib/supabase/server'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'プロジェクト一覧 | LandBridge Portfolio',
-  description: 'LandBridge株式会社の開発実績一覧。ホームページ、ランディングページ、Webアプリケーション、モバイルアプリケーションの制作事例をご覧いただけます。',
-  keywords: ['プロジェクト', '開発実績', 'ポートフォリオ', 'Webサイト制作', 'アプリ開発', 'LandBridge'],
+  title: '開発実績一覧 | LandBridge株式会社',
+  description: '企業サイト、LP、Webアプリ、モバイルアプリなど豊富な開発実績。最新のReact、Next.js、TypeScriptを活用した高品質な制作事例をご覧ください。',
+  keywords: ['開発実績', 'ポートフォリオ', 'Webサイト制作', 'LP制作', 'システム開発', 'アプリ開発', 'React', 'Next.js', 'TypeScript'],
   openGraph: {
-    title: 'プロジェクト一覧 | LandBridge Portfolio',
-    description: 'LandBridge株式会社の開発実績一覧をご覧ください',
+    title: '開発実績一覧 | LandBridge株式会社',
+    description: '豊富な開発実績と最新技術で、お客様のビジネスを成功に導きます。制作事例をぜひご覧ください。',
     type: 'website',
     url: 'https://portfolio-site-blond-eta.vercel.app/projects',
   },

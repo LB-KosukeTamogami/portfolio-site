@@ -6,10 +6,12 @@ import StructuredData from './components/StructuredData'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'LandBridge Portfolio',
-  description: 'LandBridge株式会社のポートフォリオサイト - Webサイト・アプリケーション開発',
-  keywords: ['portfolio', 'LandBridge', 'web development', 'アプリ開発', 'ポートフォリオ'],
+  title: 'LandBridge株式会社 | Web制作・アプリ開発の実績紹介',
+  description: 'LandBridge株式会社の開発実績をご紹介。企業サイト、LP、Webアプリ、モバイルアプリなど幅広い制作実績。最新技術で課題解決をサポートします。無料相談受付中。',
+  keywords: ['LandBridge', 'ランドブリッジ', 'Web制作', 'アプリ開発', 'ホームページ制作', 'システム開発', 'ポートフォリオ', '開発実績', '東京'],
   authors: [{ name: 'LandBridge株式会社' }],
+  creator: 'LandBridge株式会社',
+  publisher: 'LandBridge株式会社',
   icons: {
     icon: [
       { url: '/favicon.ico', type: 'image/x-icon' },
@@ -30,10 +32,15 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.json',
   themeColor: '#1d4ed8',
+  metadataBase: new URL('https://portfolio-site-blond-eta.vercel.app'),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: 'LandBridge Portfolio',
-    description: 'LandBridge株式会社のポートフォリオサイト - Webサイト・アプリケーション開発',
+    title: 'LandBridge株式会社 | Web制作・アプリ開発の実績紹介',
+    description: '最新技術を活用したWeb制作・アプリ開発ならLandBridge。豊富な開発実績と確かな技術力で、お客様のビジネスを成功に導きます。',
     type: 'website',
+    locale: 'ja_JP',
     url: 'https://portfolio-site-blond-eta.vercel.app',
     siteName: 'LandBridge Portfolio',
     images: [
@@ -47,9 +54,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LandBridge Portfolio',
-    description: 'LandBridge株式会社のポートフォリオサイト - Webサイト・アプリケーション開発',
+    title: 'LandBridge株式会社 | Web制作・アプリ開発',
+    description: '最新技術を活用したWeb制作・アプリ開発。企業サイト、LP、システム開発まで幅広く対応。無料相談受付中。',
     images: ['https://portfolio-site-blond-eta.vercel.app/opengraph-image'],
+    creator: '@landbridge_jp',
   },
 }
 
