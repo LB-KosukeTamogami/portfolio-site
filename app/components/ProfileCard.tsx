@@ -23,8 +23,8 @@ interface ProfileCardProps {
 export default function ProfileCard({ profile, categoryStats }: ProfileCardProps) {
   const defaultProfile = {
     name: "LandBridge株式会社",
-    title: "バイブコーディング開発実績",
-    bio: "このサイトはLandBridge株式会社のバイブコーディング開発実績を掲載しています。最新技術を活用したWebサイト・アプリケーション開発の事例をご覧いただけます。",
+    title: "Webサイト・アプリケーション開発",
+    bio: "私たちは最新技術と確かな実装力で、お客様のビジネスを成功に導くWebソリューションを提供しています。下記の開発実績をクリックして、詳細な事例と技術スタックをご確認ください。",
     location: null,
     email: null,
     github_url: null,
@@ -58,7 +58,7 @@ export default function ProfileCard({ profile, categoryStats }: ProfileCardProps
               className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105"
             >
               <Globe className="h-5 w-5" />
-              <span>コーポレートサイト</span>
+              <span>企業サイトはこちら</span>
               <ExternalLink className="h-4 w-4" />
             </Link>
           </div>
@@ -70,19 +70,19 @@ export default function ProfileCard({ profile, categoryStats }: ProfileCardProps
             <ul className="space-y-3">
               <li className="flex items-center justify-between">
                 <span className="text-gray-300 text-sm">コーポレートサイト</span>
-                <span className="text-2xl font-bold text-blue-400">{categoryStats?.homepage || 0}</span>
+                <span className="text-2xl font-bold text-blue-400 w-10 text-right tabular-nums">{categoryStats?.homepage || 0}</span>
               </li>
               <li className="flex items-center justify-between">
                 <span className="text-gray-300 text-sm">ランディングページ</span>
-                <span className="text-2xl font-bold text-purple-400">{categoryStats?.['landing-page'] || 0}</span>
+                <span className="text-2xl font-bold text-purple-400 w-10 text-right tabular-nums">{categoryStats?.['landing-page'] || 0}</span>
               </li>
               <li className="flex items-center justify-between">
                 <span className="text-gray-300 text-sm">Webアプリケーション</span>
-                <span className="text-2xl font-bold text-indigo-400">{categoryStats?.['web-app'] || 0}</span>
+                <span className="text-2xl font-bold text-indigo-400 w-10 text-right tabular-nums">{categoryStats?.['web-app'] || 0}</span>
               </li>
               <li className="flex items-center justify-between">
                 <span className="text-gray-300 text-sm">モバイルアプリ</span>
-                <span className="text-2xl font-bold text-blue-400">{categoryStats?.['mobile-app'] || 0}</span>
+                <span className="text-2xl font-bold text-blue-400 w-10 text-right tabular-nums">{categoryStats?.['mobile-app'] || 0}</span>
               </li>
             </ul>
           </div>
