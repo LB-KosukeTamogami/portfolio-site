@@ -155,53 +155,6 @@ export default function ContactPage() {
             </div>
           </form>
           </div>
-          
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <div className="bg-youtube-gray rounded-xl p-6">
-              <h2 className="text-xl font-semibold mb-4 text-center">ご相談内容の例</h2>
-              <ul className="space-y-3 text-muted-foreground">
-                <li className="flex items-start gap-3">
-                  <span className="text-blue-400 text-lg">•</span>
-                  <span>Webアプリケーション・モバイルアプリの開発</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-blue-400 text-lg">•</span>
-                  <span>既存システムのリニューアル・改修</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-blue-400 text-lg">•</span>
-                  <span>技術コンサルティング・アドバイザリー</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-blue-400 text-lg">•</span>
-                  <span>プロトタイプ開発・MVP構築</span>
-                </li>
-              </ul>
-            </div>
-            
-            <div className="bg-youtube-gray rounded-xl p-6">
-              <h2 className="text-xl font-semibold mb-4 text-center">レスポンス目安</h2>
-              <div className="space-y-4 text-muted-foreground">
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <span>初回返信: 24時間以内</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                  <span>詳細なお見積り: 2-3営業日</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                  <span>プロジェクト開始: ご相談後</span>
-                </div>
-                <div className="mt-4 p-3 bg-blue-900/20 rounded-lg border border-blue-500/30">
-                  <p className="text-sm text-blue-300">
-                    まずはお気軽にご相談ください。無料で最適なソリューションをご提案いたします。
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </MainLayout>
