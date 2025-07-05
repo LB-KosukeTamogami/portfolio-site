@@ -5,11 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/app/lib/utils'
 
-interface SidebarProps {
-  isOpen: boolean
-}
-
-const Sidebar = ({ isOpen }: SidebarProps) => {
+const Sidebar = () => {
   const pathname = usePathname()
   
   const menuItems = [
@@ -20,15 +16,9 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
 
 
   return (
-    <aside
-      className={cn(
-        "fixed left-0 top-16 h-full bg-youtube-dark border-r border-border z-40 overflow-y-auto",
-        "transition-[width] duration-200 ease-in-out",
-        isOpen ? "w-60" : "w-16"
-      )}
-    >
-      <div className="py-2">
-        <div className="space-y-1 px-2">
+    <aside className="fixed left-0 top-16 h-full w-60 bg-youtube-dark border-r border-border z-40 overflow-y-auto">
+      <div className="py-4">
+        <div className="space-y-1 px-3">
           {menuItems.map((item) => {
             const isActive = pathname === item.href
             return (
@@ -36,26 +26,17 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center w-full px-3 py-2 rounded-lg transition-all duration-200",
+                  "flex items-center w-full px-4 py-3 rounded-lg transition-all duration-200",
                   "hover:bg-blue-600/10",
-                  isActive && "bg-blue-600/20 text-blue-400",
-                  !isOpen && "justify-center"
+                  isActive && "bg-blue-600/20 text-blue-400"
                 )}
               >
                 <item.icon className="h-5 w-5 flex-shrink-0" />
-                <span 
-                  className={cn(
-                    "ml-3 whitespace-nowrap transition-all duration-200",
-                    isOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2 w-0 overflow-hidden"
-                  )}
-                >
-                  {item.label}
-                </span>
+                <span className="ml-3">{item.label}</span>
               </Link>
             )
           })}
         </div>
-
       </div>
     </aside>
   )
