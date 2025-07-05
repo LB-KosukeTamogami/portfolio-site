@@ -11,11 +11,15 @@ interface ContactFormData {
 }
 
 export async function POST(request: NextRequest) {
+  console.log('Contact form API called')
+  
   try {
     const data: ContactFormData = await request.json()
+    console.log('Form data received:', { name: data.name, email: data.email, company: data.company })
 
     // Validate required fields
     if (!data.name || !data.email || !data.message) {
+      console.log('Validation failed: missing required fields')
       return NextResponse.json(
         { error: '必須項目を入力してください' },
         { status: 400 }
@@ -32,6 +36,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Send to Slack
+    console.log('Slack webhook URL exists:', !!SLACK_WEBHOOK_URL)
+    console.log('Slack webhook URL length:', SLACK_WEBHOOK_URL.length)
+    
     if (SLACK_WEBHOOK_URL) {
       const slackMessage = {
         text: '新しいお問い合わせがありました',
@@ -83,6 +90,7 @@ export async function POST(request: NextRequest) {
         ]
       }
 
+      console.log('Sending message to Slack...')
       const slackResponse = await fetch(SLACK_WEBHOOK_URL, {
         method: 'POST',
         headers: {
@@ -91,10 +99,18 @@ export async function POST(request: NextRequest) {
         body: JSON.stringify(slackMessage),
       })
 
+      console.log('Slack response status:', slackResponse.status)
+      console.log('Slack response ok:', slackResponse.ok)
+      
       if (!slackResponse.ok) {
-        console.error('Slack notification failed:', slackResponse.statusText)
+        const responseText = await slackResponse.text()
+        console.error('Slack notification failed:', slackResponse.statusText, responseText)
         // Continue processing even if Slack fails
+      } else {
+        console.log('Slack notification sent successfully')
       }
+    } else {
+      console.warn('Slack webhook URL not found in environment variables')
     }
 
     return NextResponse.json(
