@@ -4,7 +4,14 @@
 
 管理画面にアクセスするためのログイン情報：
 
-- **URL**: http://localhost:3001/admin/login (開発環境)
+- **URL**: http://localhost:3000/admin/login (開発環境)
+- **本番URL**: https://portfolio-site-blond-eta.vercel.app/admin/login
+
+### オプション1（推奨 - .env.localと一致）
+- **メールアドレス**: `tamogami@landbridge.co.jp`
+- **パスワード**: `Portfolio2024!`
+
+### オプション2
 - **メールアドレス**: `admin@portfolio.com`
 - **パスワード**: `Portfolio2024!`
 
@@ -13,9 +20,9 @@
 1. Supabaseダッシュボードにログイン
 2. 左メニューから「Authentication」→「Users」を選択
 3. 「Invite user」または「Create new user」ボタンをクリック
-4. 以下の情報を入力：
-   - Email: `admin@portfolio.com`
-   - Password: `Portfolio2024!`
+4. 以下の情報を入力（どちらか選択）：
+   - オプション1: Email: `tamogami@landbridge.co.jp`, Password: `Portfolio2024!`
+   - オプション2: Email: `admin@portfolio.com`, Password: `Portfolio2024!`
 5. 「Create user」をクリックして作成完了
 
 ## 注意事項
