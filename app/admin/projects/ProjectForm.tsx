@@ -67,7 +67,7 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
         if (error) throw error
       }
 
-      router.push('/admin/projects')
+      router.push('/admin')
       router.refresh()
     } catch (error: unknown) {
       alert('Error saving project: ' + (error instanceof Error ? error.message : 'Unknown error'))
@@ -98,7 +98,7 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block text-sm font-medium mb-2">
-            Title *
+            プロジェクト名 *
           </label>
           <input
             type="text"
@@ -111,7 +111,7 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
 
         <div>
           <label className="block text-sm font-medium mb-2">
-            Category
+            カテゴリ
           </label>
           <select
             value={formData.category}
@@ -127,7 +127,7 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
 
         <div>
           <label className="block text-sm font-medium mb-2">
-            Status
+            ステータス
           </label>
           <select
             value={formData.status}
@@ -156,7 +156,7 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
 
       <div>
         <label className="block text-sm font-medium mb-2">
-          Description *
+          説明 *
         </label>
         <textarea
           value={formData.description}
@@ -169,7 +169,7 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
 
       <div>
         <label className="block text-sm font-medium mb-2">
-          Thumbnail URL *
+          サムネイルURL *
         </label>
         <input
           type="url"
@@ -184,7 +184,7 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block text-sm font-medium mb-2">
-            Live URL
+            サイトURL
           </label>
           <input
             type="url"
@@ -211,7 +211,7 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
 
       <div>
         <label className="block text-sm font-medium mb-2">
-          Technologies
+          使用技術
         </label>
         <div className="flex gap-2 mb-2">
           <input
@@ -220,14 +220,14 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
             onChange={(e) => setTechInput(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTechnology())}
             className="flex-1 px-3 py-2 bg-youtube-dark border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-            placeholder="Add a technology..."
+            placeholder="技術を追加..."
           />
           <button
             type="button"
             onClick={addTechnology}
             className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
           >
-            Add
+追加
           </button>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -258,13 +258,13 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
               onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
               className="w-4 h-4 text-youtube-red bg-youtube-dark border-border rounded focus:ring-blue-600"
             />
-            <span className="text-sm font-medium">Featured Project</span>
+            <span className="text-sm font-medium">注目プロジェクト</span>
           </label>
         </div>
 
         <div>
           <label className="block text-sm font-medium mb-2">
-            Order
+            表示順序
           </label>
           <input
             type="number"
@@ -282,15 +282,15 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
           className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors disabled:opacity-50"
         >
           <Save className="h-5 w-5" />
-          {loading ? 'Saving...' : 'Save Project'}
+          {loading ? '保存中...' : '保存する'}
         </button>
         
         <Link
-          href="/admin/projects"
+          href="/admin"
           className="flex items-center gap-2 bg-youtube-gray hover:bg-youtube-dark px-6 py-2 rounded-lg transition-colors"
         >
           <X className="h-5 w-5" />
-          Cancel
+          キャンセル
         </Link>
       </div>
     </form>

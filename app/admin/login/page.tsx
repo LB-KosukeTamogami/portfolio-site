@@ -46,12 +46,12 @@ export default function AdminLoginPage() {
           </div>
         </div>
         
-        <h1 className="text-2xl font-bold text-center mb-8">Admin Login</h1>
+        <h1 className="text-2xl font-bold text-center mb-8">管理者ログイン</h1>
         
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-medium mb-2">
-              Email
+              メールアドレス
             </label>
             <div className="relative">
               <Mail className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
@@ -61,7 +61,7 @@ export default function AdminLoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full pl-10 pr-3 py-2 bg-youtube-dark border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-                placeholder="admin@example.com"
+                placeholder="admin@portfolio.com"
                 required
               />
             </div>
@@ -69,7 +69,7 @@ export default function AdminLoginPage() {
           
           <div>
             <label htmlFor="password" className="block text-sm font-medium mb-2">
-              Password
+              パスワード
             </label>
             <div className="relative">
               <Lock className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
@@ -96,13 +96,13 @@ export default function AdminLoginPage() {
             disabled={loading}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? 'ログイン中...' : 'ログイン'}
           </button>
         </form>
         
         <div className="mt-6 text-center text-sm text-muted-foreground">
           <a href="/" className="hover:text-white transition-colors">
-            ← Back to Portfolio
+            ← ポートフォリオに戻る
           </a>
         </div>
       </div>

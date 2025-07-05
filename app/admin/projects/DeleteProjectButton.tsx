@@ -16,7 +16,7 @@ export default function DeleteProjectButton({ projectId, projectTitle }: DeleteP
   const supabase = createClient()
 
   const handleDelete = async () => {
-    if (!confirm(`Are you sure you want to delete "${projectTitle}"?`)) {
+    if (!confirm(`本当に「${projectTitle}」を削除しますか？`)) {
       return
     }
 
