@@ -11,11 +11,14 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <div className="min-h-screen bg-youtube-dark text-foreground">
-      <Header onMenuToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
+      <Header 
+        onMenuToggle={() => setIsSidebarOpen(!isSidebarOpen)} 
+        isMenuOpen={isSidebarOpen}
+      />
       <Sidebar isOpen={isSidebarOpen} />
       <main
         className={cn(
-          "pt-16 transition-all duration-300",
+          "pt-16 transition-[margin-left] duration-200 ease-in-out",
           isSidebarOpen ? "ml-60" : "ml-16"
         )}
       >

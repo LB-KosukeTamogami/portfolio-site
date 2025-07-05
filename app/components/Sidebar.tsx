@@ -22,7 +22,8 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
   return (
     <aside
       className={cn(
-        "fixed left-0 top-16 h-full bg-youtube-dark border-r border-border transition-all duration-300 z-40 overflow-y-auto",
+        "fixed left-0 top-16 h-full bg-youtube-dark border-r border-border z-40 overflow-y-auto",
+        "transition-[width] duration-200 ease-in-out",
         isOpen ? "w-60" : "w-16"
       )}
     >
@@ -35,13 +36,21 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center w-full px-3 py-2 rounded-lg hover:bg-blue-600/10 transition-colors",
+                  "flex items-center w-full px-3 py-2 rounded-lg transition-all duration-200",
+                  "hover:bg-blue-600/10",
                   isActive && "bg-blue-600/20 text-blue-400",
                   !isOpen && "justify-center"
                 )}
               >
                 <item.icon className="h-5 w-5 flex-shrink-0" />
-                {isOpen && <span className="ml-3">{item.label}</span>}
+                <span 
+                  className={cn(
+                    "ml-3 whitespace-nowrap transition-all duration-200",
+                    isOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2 w-0 overflow-hidden"
+                  )}
+                >
+                  {item.label}
+                </span>
               </Link>
             )
           })}
