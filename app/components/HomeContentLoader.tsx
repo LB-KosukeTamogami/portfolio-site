@@ -3,7 +3,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { createStaticClient } from '@/app/lib/supabase/static'
 import ProfileCard from './ProfileCard'
-import ProfileCardSkeleton from './ProfileCardSkeleton'
 import ProjectGridSkeleton from './ProjectGridSkeleton'
 import ProjectCard from './ProjectCard'
 import { ArrowRight, FolderOpen } from 'lucide-react'
@@ -15,8 +14,6 @@ const ProjectDetailModal = lazy(() => import('./ProjectDetailModal'))
 
 export default function HomeContentLoader() {
   const [projects, setProjects] = useState<Project[]>([])
-  const [profile, setProfile] = useState<any>(null)
-  const [profileLoading, setProfileLoading] = useState(true)
   const [projectsLoading, setProjectsLoading] = useState(true)
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -26,27 +23,16 @@ export default function HomeContentLoader() {
       try {
         const supabase = createStaticClient()
         
-        // データを並列で取得
-        const [projectsResponse, profileResponse] = await Promise.all([
-          supabase
-            .from('projects')
-            .select('*')
-            .order('order', { ascending: true }),
-          supabase
-            .from('profiles')
-            .select('*')
-            .limit(1)
-            .single()
-        ])
+        const { data: projectsData } = await supabase
+          .from('projects')
+          .select('*')
+          .order('order', { ascending: true })
 
-        setProjects(projectsResponse.data || [])
-        setProfile(profileResponse.data)
+        setProjects(projectsData || [])
       } catch (error) {
         console.error('Error fetching data:', error)
         setProjects([])
-        setProfile(null)
       } finally {
-        setProfileLoading(false)
         setProjectsLoading(false)
       }
     }
@@ -82,12 +68,8 @@ export default function HomeContentLoader() {
         {/* SEO用の非表示h1 */}
         <h1 className="sr-only">LandBridge株式会社 - AIによる自動コーディングを活用した開発実績</h1>
         
-        {/* Profile Card */}
-        {profileLoading ? (
-          <ProfileCardSkeleton />
-        ) : (
-          <ProfileCard profile={profile} categoryStats={categoryStats} />
-        )}
+        {/* Profile Card - 静的コンテンツなので即座に表示 */}
+        <ProfileCard categoryStats={categoryStats} />
 
         {/* Featured Projects */}
         <section className="mb-8">

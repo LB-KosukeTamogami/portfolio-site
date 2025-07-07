@@ -2,16 +2,6 @@ import { Globe, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 
 interface ProfileCardProps {
-  profile?: {
-    name: string
-    title: string
-    bio: string
-    location?: string
-    email?: string
-    github_url?: string
-    twitter_url?: string
-    linkedin_url?: string
-  }
   categoryStats?: {
     homepage: number
     'landing-page': number
@@ -20,8 +10,8 @@ interface ProfileCardProps {
   }
 }
 
-export default function ProfileCard({ profile, categoryStats }: ProfileCardProps) {
-  const defaultProfile = {
+export default function ProfileCard({ categoryStats }: ProfileCardProps) {
+  const profile = {
     name: "LandBridge株式会社",
     title: "AIによる自動コーディングを活用した開発実績",
     bio: "当社では、AIによる自動コーディング手法「バイブコーディング」を取り入れることで、従来にないスピード感と柔軟性を備えた開発を実現しています。\n本サイトでは、その技術を活用して開発したWebサイトやアプリケーションの事例を掲載しています。\nご相談やお見積りなど、お気軽にお問い合わせください。",
@@ -31,8 +21,6 @@ export default function ProfileCard({ profile, categoryStats }: ProfileCardProps
     twitter_url: null,
     linkedin_url: null,
   }
-
-  const data = profile || defaultProfile
 
   return (
     <div className="relative rounded-lg p-4 sm:p-6 md:p-8 mb-6 md:mb-8 overflow-hidden">
@@ -44,11 +32,11 @@ export default function ProfileCard({ profile, categoryStats }: ProfileCardProps
       <div className="relative flex flex-col lg:flex-row gap-6 md:gap-8">
         <div className="flex-1">
           <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent pb-1" style={{ lineHeight: '1.4' }}>
-            {data.name}
+            {profile.name}
           </div>
-          <h2 className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-4 sm:mb-6 font-medium">{data.title}</h2>
+          <h2 className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-4 sm:mb-6 font-medium">{profile.title}</h2>
           
-          <div className="text-sm sm:text-base md:text-lg mb-4 sm:mb-6 leading-relaxed text-gray-200 whitespace-pre-line">{data.bio}</div>
+          <div className="text-sm sm:text-base md:text-lg mb-4 sm:mb-6 leading-relaxed text-gray-200 whitespace-pre-line">{profile.bio}</div>
           
           <div className="flex items-center gap-2 mt-4 sm:mt-6">
             <Link 
