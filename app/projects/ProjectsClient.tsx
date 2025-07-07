@@ -40,7 +40,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
 
   return (
     <>
-      <div className="p-6 pt-2">
+      <div className="p-4 sm:p-6 pt-0 sm:pt-1">
       <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">開発実績一覧</h1>
       
       {/* Category Tabs */}

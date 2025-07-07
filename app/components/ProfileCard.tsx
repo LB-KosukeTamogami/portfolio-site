@@ -43,7 +43,7 @@ export default function ProfileCard({ profile, categoryStats }: ProfileCardProps
       {/* コンテンツ */}
       <div className="relative flex flex-col lg:flex-row gap-6 md:gap-8">
         <div className="flex-1">
-          <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent leading-tight">
             {data.name}
           </div>
           <h2 className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-4 sm:mb-6 font-medium">{data.title}</h2>
