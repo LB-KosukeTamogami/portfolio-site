@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/app/lib/supabase/client'
 import { Save, X, Upload } from 'lucide-react'
@@ -32,6 +32,7 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
   const [uploading, setUploading] = useState(false)
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null)
   const [thumbnailPreview, setThumbnailPreview] = useState<string>(initialData?.thumbnail || '')
+  const [featuredCount, setFeaturedCount] = useState(0)
   
   const [formData, setFormData] = useState<ProjectFormData>({
     title: initialData?.title || '',
@@ -44,6 +45,22 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
     duration: initialData?.duration || '',
     order: initialData?.order || 0,
   })
+
+  // Featured project countを取得
+  useEffect(() => {
+    const fetchFeaturedCount = async () => {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('id')
+        .eq('featured', true)
+        .neq('id', projectId || '')
+      
+      if (!error) {
+        setFeaturedCount(data?.length || 0)
+      }
+    }
+    fetchFeaturedCount()
+  }, [supabase, projectId])
 
   const handleThumbnailChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -140,6 +157,15 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
       ...formData,
       technologies: formData.technologies.filter(t => t !== tech)
     })
+  }
+
+  const handleFeaturedChange = (checked: boolean) => {
+    // 3つまでの制限をチェック
+    if (checked && featuredCount >= 3 && !initialData?.featured) {
+      alert('注目プロジェクトは最大3つまでです。')
+      return
+    }
+    setFormData({ ...formData, featured: checked })
   }
 
   return (
@@ -302,11 +328,20 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
             <input
               type="checkbox"
               checked={formData.featured}
-              onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
-              className="w-4 h-4 text-youtube-red bg-youtube-dark border-border rounded focus:ring-blue-600"
+              onChange={(e) => handleFeaturedChange(e.target.checked)}
+              disabled={!formData.featured && featuredCount >= 3}
+              className="w-4 h-4 text-youtube-red bg-youtube-dark border-border rounded focus:ring-blue-600 disabled:opacity-50"
             />
-            <span className="text-sm font-medium">注目プロジェクト</span>
+            <span className="text-sm font-medium">
+              注目プロジェクト
+              {featuredCount >= 3 && !formData.featured && (
+                <span className="text-xs text-red-400 ml-2">(上限達成: {featuredCount}/3)</span>
+              )}
+            </span>
           </label>
+          <p className="text-xs text-muted-foreground mt-1">
+            現在の注目プロジェクト: {featuredCount}/3
+          </p>
         </div>
 
         <div>

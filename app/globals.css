@@ -50,8 +50,29 @@
     @apply border-border;
   }
 
+  html {
+    @apply bg-background;
+    background-color: hsl(var(--background));
+  }
+
   body {
     @apply bg-background text-foreground font-sans;
+    background-color: hsl(var(--background));
+    min-height: 100vh;
+    /* Prevent flash of white/unstyled content */
+    position: relative;
+  }
+
+  /* Prevent page flashing during transitions */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: hsl(var(--background));
+    z-index: -1;
   }
 
   .hover-scale {
@@ -74,5 +95,10 @@
   
   .scrollbar-hide::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
+  }
+
+  /* Smooth page transitions */
+  .page-transition {
+    transition: opacity 0.15s ease-in-out;
   }
 }
