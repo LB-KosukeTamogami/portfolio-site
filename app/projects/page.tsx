@@ -1,5 +1,6 @@
 import MainLayout from '@/app/components/MainLayout'
-import ProjectsContentLoader from '@/app/components/ProjectsContentLoader'
+import ProjectsClient from './ProjectsClient'
+import { createStaticClient } from '@/app/lib/supabase/static'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -14,10 +15,23 @@ export const metadata: Metadata = {
   },
 }
 
-export default function ProjectsPage() {
+export const revalidate = 60 // ISR: 60秒ごとに再生成
+
+async function getProjects() {
+  const supabase = createStaticClient()
+  const { data: projects } = await supabase
+    .from('projects')
+    .select('*')
+    .order('order', { ascending: true })
+  return projects || []
+}
+
+export default async function ProjectsPage() {
+  const projects = await getProjects()
+
   return (
     <MainLayout>
-      <ProjectsContentLoader />
+      <ProjectsClient projects={projects} />
     </MainLayout>
   )
 }
