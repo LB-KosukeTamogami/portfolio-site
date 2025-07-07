@@ -35,7 +35,7 @@ export default function HomeContent({ profiles, categoryStats, featuredProjects 
 
   return (
     <>
-      <div className="p-4 sm:p-6 pt-0 sm:pt-1">
+      <div className="p-4 sm:p-6 pt-2 sm:pt-3">
         {/* SEO用の非表示h1 */}
         <h1 className="sr-only">LandBridge株式会社 - AIによる自動コーディングを活用した開発実績</h1>
         
