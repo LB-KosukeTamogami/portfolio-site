@@ -16,67 +16,70 @@ export default async function Image() {
       (
         <div
           style={{
-            fontSize: 128,
-            background: '#0f0f0f',
             width: '100%',
             height: '100%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexDirection: 'column',
-            position: 'relative',
+            backgroundColor: '#0f0f0f',
           }}
         >
-          {/* グラデーション背景 */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(to bottom right, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.2), rgba(99, 102, 241, 0.2))',
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(to top right, transparent, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1))',
-            }}
-          />
-          
           <div
             style={{
               display: 'flex',
+              flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              flexDirection: 'column',
-              position: 'relative',
-              zIndex: 10,
+              padding: '60px',
             }}
           >
-            {/* 会社名 */}
+            {/* 上部のグラデーションバー */}
             <div
               style={{
-                fontSize: 72,
+                width: '120px',
+                height: '4px',
+                background: 'linear-gradient(90deg, #60a5fa 0%, #a78bfa 100%)',
+                borderRadius: '2px',
+                marginBottom: '32px',
+              }}
+            />
+            
+            {/* 会社名 */}
+            <h1
+              style={{
+                fontSize: '72px',
                 fontWeight: 'bold',
-                background: 'linear-gradient(to right, #60a5fa, #a78bfa)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                padding: '0 20px',
-                marginBottom: 16,
+                color: '#ffffff',
+                margin: '0',
+                marginBottom: '24px',
+                letterSpacing: '0.02em',
               }}
             >
               LandBridge株式会社
-            </div>
+            </h1>
+            
             {/* サブタイトル */}
-            <div
+            <p
               style={{
-                fontSize: 32,
-                color: '#cbd5e1',
-                fontWeight: 500,
+                fontSize: '28px',
+                color: '#94a3b8',
+                margin: '0',
+                marginBottom: '32px',
+                textAlign: 'center',
               }}
             >
               AIによる自動コーディングを活用した開発実績
-            </div>
+            </p>
+            
+            {/* 下部のグラデーションバー */}
+            <div
+              style={{
+                width: '80px',
+                height: '4px',
+                background: 'linear-gradient(90deg, #a78bfa 0%, #60a5fa 100%)',
+                borderRadius: '2px',
+              }}
+            />
           </div>
         </div>
       ),
