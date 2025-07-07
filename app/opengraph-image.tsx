@@ -38,8 +38,6 @@ export default async function Image() {
               style={{
                 fontSize: 60,
                 fontWeight: 'bold',
-                background: 'linear-gradient(90deg, #60a5fa 0%, #a78bfa 100%)',
-                backgroundClip: 'text',
                 color: '#60a5fa',
                 padding: '0 20px',
               }}
