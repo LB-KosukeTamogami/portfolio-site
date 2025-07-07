@@ -36,13 +36,16 @@ export default function HomeContent({ profiles, categoryStats, featuredProjects 
   return (
     <>
       <div className="p-6 pt-2">
+        {/* SEO用の非表示h1 */}
+        <h1 className="sr-only">LandBridge株式会社 - AIによる自動コーディングを活用した開発実績</h1>
+        
         {/* Profile Card */}
         <ProfileCard profile={profiles} categoryStats={categoryStats} />
 
         {/* Featured Projects */}
         <section className="mb-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold">Featured Projects</h2>
+            <h2 className="text-2xl font-bold">注目のプロジェクト</h2>
             <Link
               href="/projects"
               className="text-blue-600 hover:underline flex items-center gap-1"

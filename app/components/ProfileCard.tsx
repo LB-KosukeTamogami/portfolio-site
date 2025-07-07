@@ -43,12 +43,12 @@ export default function ProfileCard({ profile, categoryStats }: ProfileCardProps
       {/* コンテンツ */}
       <div className="relative flex flex-col md:flex-row gap-8">
         <div className="flex-1">
-          <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          <div className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             {data.name}
-          </h1>
-          <p className="text-xl text-gray-300 mb-4">{data.title}</p>
+          </div>
+          <h2 className="text-xl md:text-2xl text-gray-300 mb-6 font-medium">{data.title}</h2>
           
-          <div className="text-lg mb-6 leading-relaxed text-gray-200 whitespace-pre-line">{data.bio}</div>
+          <div className="text-base md:text-lg mb-6 leading-relaxed text-gray-200 whitespace-pre-line">{data.bio}</div>
           
           <div className="flex items-center gap-2 mt-6">
             <Link 
@@ -66,7 +66,7 @@ export default function ProfileCard({ profile, categoryStats }: ProfileCardProps
 
         <div className="md:w-1/3">
           <div className="bg-black/30 backdrop-blur-sm rounded-lg p-6 border border-white/10">
-            <h3 className="font-semibold mb-4 text-gray-200">開発実績</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-200">開発実績</h3>
             <ul className="space-y-3">
               <li className="flex items-center justify-between">
                 <span className="text-gray-300 text-sm">コーポレートサイト</span>
