@@ -60,7 +60,7 @@ export default function HomeContent({ profiles, categoryStats, featuredProjects 
               <p className="text-xl text-muted-foreground">No featured projects yet</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {featuredProjects.map((project) => (
                 <ProjectCard 
                   key={project.id} 

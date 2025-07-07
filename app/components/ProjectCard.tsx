@@ -56,11 +56,11 @@ const ProjectCard = ({ project, onOpenDetail }: ProjectCardProps) => {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
-        <div className={`absolute top-2 right-2 ${categoryColors[project.category]} text-white text-xs px-2 py-1 rounded`}>
+        <div className={`absolute top-1 sm:top-2 right-1 sm:right-2 ${categoryColors[project.category]} text-white text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded`}>
           {categoryLabels[project.category]}
         </div>
         {project.featured && (
-          <div className="absolute top-2 left-2 bg-blue-600 text-white text-xs px-2 py-1 rounded">
+          <div className="absolute top-1 sm:top-2 left-1 sm:left-2 bg-blue-600 text-white text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded">
             Featured
           </div>
         )}
@@ -76,14 +76,14 @@ const ProjectCard = ({ project, onOpenDetail }: ProjectCardProps) => {
         )}
       </div>
       
-      <div className="p-3">
+      <div className="p-2.5 sm:p-3">
         <div className="flex-1 min-w-0">
-            <h3 className="font-medium text-sm leading-5 line-clamp-2 mb-1 group-hover:text-white transition-colors">
+            <h3 className="font-medium text-xs sm:text-sm leading-4 sm:leading-5 line-clamp-2 mb-1 group-hover:text-white transition-colors">
               {project.title}
             </h3>
             
             <div className="mb-2">
-              <p className={`text-xs text-muted-foreground ${!isExpanded ? 'line-clamp-2' : ''}`}>
+              <p className={`text-[11px] sm:text-xs text-muted-foreground ${!isExpanded ? 'line-clamp-2' : ''}`}>
                 {project.description}
               </p>
               {project.description.length > 100 && (
@@ -92,7 +92,7 @@ const ProjectCard = ({ project, onOpenDetail }: ProjectCardProps) => {
                     e.stopPropagation()
                     setIsExpanded(!isExpanded)
                   }}
-                  className="text-xs text-blue-400 hover:text-blue-300 mt-1 flex items-center gap-1"
+                  className="text-[11px] sm:text-xs text-blue-400 hover:text-blue-300 mt-1 flex items-center gap-0.5 sm:gap-1"
                 >
                   {isExpanded ? (
                     <>
@@ -109,23 +109,24 @@ const ProjectCard = ({ project, onOpenDetail }: ProjectCardProps) => {
               )}
             </div>
             
-            <div className="flex flex-wrap gap-1 mb-2">
+            <div className="flex flex-wrap gap-0.5 sm:gap-1 mb-1.5 sm:mb-2">
               {project.technologies.slice(0, 3).map((tech) => (
-                <span key={tech} className="text-xs bg-youtube-gray px-2 py-0.5 rounded">
+                <span key={tech} className="text-[10px] sm:text-xs bg-youtube-gray px-1.5 sm:px-2 py-0.5 rounded">
                   {tech}
                 </span>
               ))}
               {project.technologies.length > 3 && (
-                <span className="text-xs text-muted-foreground">
+                <span className="text-[10px] sm:text-xs text-muted-foreground">
                   +{project.technologies.length - 3}
                 </span>
               )}
             </div>
             
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                <Clock className="w-3 h-3" />
-                <span>開発期間: {project.duration}</span>
+              <div className="flex items-center gap-0.5 sm:gap-1 text-[11px] sm:text-xs text-muted-foreground">
+                <Clock className="w-2.5 sm:w-3 h-2.5 sm:h-3" />
+                <span className="hidden sm:inline">開発期間: </span>
+                <span>{project.duration}</span>
               </div>
               {onOpenDetail && (
                 <button
@@ -133,9 +134,9 @@ const ProjectCard = ({ project, onOpenDetail }: ProjectCardProps) => {
                     e.stopPropagation()
                     onOpenDetail(project)
                   }}
-                  className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1"
+                  className="text-[11px] sm:text-xs text-blue-400 hover:text-blue-300 flex items-center gap-0.5 sm:gap-1 px-2 py-1 -mr-1 -mb-1 rounded"
                 >
-                  <Info className="w-3 h-3" />
+                  <Info className="w-2.5 sm:w-3 h-2.5 sm:h-3" />
                   詳細
                 </button>
               )}
