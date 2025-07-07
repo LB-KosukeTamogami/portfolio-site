@@ -1,3 +1,5 @@
+import withBundleAnalyzer from '@next/bundle-analyzer'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -34,15 +36,14 @@ const nextConfig = {
       },
     ],
   },
-  swcMinify: true,
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
 }
 
 // Bundle analyzer設定
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
+const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
 
-module.exports = withBundleAnalyzer(nextConfig)
+export default bundleAnalyzer(nextConfig)
