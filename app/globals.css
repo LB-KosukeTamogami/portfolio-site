@@ -112,4 +112,38 @@
   .page-transition {
     transition: opacity 0.15s ease-in-out;
   }
+
+  /* Shimmer effect for skeleton loading */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Enhanced skeleton styles with shimmer */
+  .skeleton-box {
+    @apply relative overflow-hidden;
+    background: #272727;
+  }
+
+  .skeleton-box::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.04) 20%,
+      rgba(255, 255, 255, 0.04) 60%,
+      transparent 100%
+    );
+    animation: shimmer 2s infinite;
+  }
 }
