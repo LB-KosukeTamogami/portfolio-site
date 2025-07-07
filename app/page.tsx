@@ -1,12 +1,12 @@
 import MainLayout from './components/MainLayout'
 import HomeContent from './components/HomeContent'
-import { createClient } from '@/app/lib/supabase/server'
+import { createStaticClient } from '@/app/lib/supabase/static'
 import { unstable_cache } from 'next/cache'
 
 // データフェッチをキャッシュ
 const getCachedProjects = unstable_cache(
   async () => {
-    const supabase = await createClient()
+    const supabase = createStaticClient()
     const { data: projects } = await supabase
       .from('projects')
       .select('*')
@@ -19,7 +19,7 @@ const getCachedProjects = unstable_cache(
 
 const getCachedProfile = unstable_cache(
   async () => {
-    const supabase = await createClient()
+    const supabase = createStaticClient()
     const { data: profile } = await supabase
       .from('profiles')
       .select('*')

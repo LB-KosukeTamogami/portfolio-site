@@ -1,6 +1,6 @@
 import MainLayout from '@/app/components/MainLayout'
 import ProjectsClient from './ProjectsClient'
-import { createClient } from '@/app/lib/supabase/server'
+import { createStaticClient } from '@/app/lib/supabase/static'
 import { Metadata } from 'next'
 import { unstable_cache } from 'next/cache'
 
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 // プロジェクトデータをキャッシュ
 const getCachedProjects = unstable_cache(
   async () => {
-    const supabase = await createClient()
+    const supabase = createStaticClient()
     const { data: projects } = await supabase
       .from('projects')
       .select('*')
