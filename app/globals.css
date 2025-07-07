@@ -123,13 +123,12 @@
     }
   }
 
-  /* Enhanced skeleton styles with shimmer */
-  .skeleton-box {
+  /* Base skeleton styles with shimmer */
+  .skeleton-base {
     @apply relative overflow-hidden;
-    background: #272727;
   }
 
-  .skeleton-box::after {
+  .skeleton-base::after {
     content: '';
     position: absolute;
     top: 0;
@@ -140,10 +139,31 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(255, 255, 255, 0.04) 20%,
-      rgba(255, 255, 255, 0.04) 60%,
+      rgba(255, 255, 255, 0.05) 20%,
+      rgba(255, 255, 255, 0.05) 60%,
       transparent 100%
     );
     animation: shimmer 2s infinite;
+  }
+
+  /* Skeleton variants for different content types */
+  .skeleton-image {
+    @apply skeleton-base;
+    background: #1a1a1a;
+  }
+
+  .skeleton-title {
+    @apply skeleton-base;
+    background: #2a2a2a;
+  }
+
+  .skeleton-text {
+    @apply skeleton-base;
+    background: #232323;
+  }
+
+  .skeleton-tag {
+    @apply skeleton-base;
+    background: #1f1f1f;
   }
 }
