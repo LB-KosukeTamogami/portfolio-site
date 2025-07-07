@@ -53,11 +53,14 @@
   html {
     @apply bg-background;
     background-color: hsl(var(--background));
+    /* Prevent any white flash during page loads */
+    background: #0f0f0f !important;
   }
 
   body {
     @apply bg-background text-foreground font-sans;
     background-color: hsl(var(--background));
+    background: #0f0f0f !important;
     min-height: 100vh;
     /* Prevent flash of white/unstyled content */
     position: relative;
@@ -71,8 +74,16 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: hsl(var(--background));
-    z-index: -1;
+    background-color: #0f0f0f;
+    background: #0f0f0f !important;
+    z-index: -1000;
+  }
+
+  /* Ensure all containers maintain dark background */
+  #__next,
+  [data-nextjs-scroll-focus-boundary] {
+    background-color: #0f0f0f !important;
+    background: #0f0f0f !important;
   }
 
   .hover-scale {

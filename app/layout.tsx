@@ -70,12 +70,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ja" className="bg-youtube-dark">
+    <html lang="ja" className="bg-youtube-dark" style={{ backgroundColor: '#0f0f0f' }}>
       <head>
         <StructuredData />
         <meta name="theme-color" content="#0f0f0f" />
       </head>
-      <body className={`${inter.className} bg-youtube-dark`}>{children}</body>
+      <body className={`${inter.className} bg-youtube-dark`} style={{ backgroundColor: '#0f0f0f' }}>
+        {children}
+      </body>
     </html>
   )
 }
