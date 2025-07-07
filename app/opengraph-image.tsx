@@ -7,111 +7,65 @@ export const size = {
   width: 1200,
   height: 630,
 }
+
 export const contentType = 'image/png'
 
 export default async function Image() {
-  return new ImageResponse(
-    (
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          position: 'relative',
-          backgroundColor: '#0f0f0f',
-        }}
-      >
-        {/* グラデーション背景 - ProfileCardと同じデザイン */}
+  try {
+    return new ImageResponse(
+      (
         <div
           style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(to bottom right, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.2), rgba(99, 102, 241, 0.2))',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(to top right, transparent, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1))',
-          }}
-        />
-        
-        {/* コンテンツ */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
+            fontSize: 128,
+            background: '#0f0f0f',
             width: '100%',
             height: '100%',
-            position: 'relative',
-            zIndex: 10,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'column',
           }}
         >
-          {/* メインタイトル */}
-          <h1
-            style={{
-              fontSize: 80,
-              fontWeight: 'bold',
-              margin: 0,
-              marginBottom: 32,
-              color: '#60a5fa',
-              letterSpacing: '0.05em',
-            }}
-          >
-            LandBridge株式会社
-          </h1>
-          
-          {/* サブタイトル */}
-          <p
-            style={{
-              fontSize: 48,
-              color: '#e2e8f0',
-              margin: 0,
-              fontWeight: '500',
-            }}
-          >
-            ポートフォリオサイト
-          </p>
-          
-          {/* 装飾的な要素 */}
           <div
             style={{
               display: 'flex',
-              gap: 40,
-              marginTop: 60,
-              opacity: 0.6,
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'column',
             }}
           >
             <div
               style={{
-                width: 100,
-                height: 3,
-                background: 'linear-gradient(to right, transparent, #60a5fa, transparent)',
+                fontSize: 60,
+                fontWeight: 'bold',
+                background: 'linear-gradient(90deg, #60a5fa 0%, #a78bfa 100%)',
+                backgroundClip: 'text',
+                color: '#60a5fa',
+                padding: '0 20px',
               }}
-            />
+            >
+              LandBridge株式会社
+            </div>
             <div
               style={{
-                width: 100,
-                height: 3,
-                background: 'linear-gradient(to right, transparent, #a78bfa, transparent)',
+                fontSize: 36,
+                color: '#e2e8f0',
+                marginTop: 20,
               }}
-            />
-            <div
-              style={{
-                width: 100,
-                height: 3,
-                background: 'linear-gradient(to right, transparent, #818cf8, transparent)',
-              }}
-            />
+            >
+              ポートフォリオサイト
+            </div>
           </div>
         </div>
-      </div>
-    ),
-    {
-      ...size,
-    }
-  )
+      ),
+      {
+        ...size,
+      },
+    )
+  } catch (e: any) {
+    console.log(`${e.message}`)
+    return new Response(`Failed to generate the image`, {
+      status: 500,
+    })
+  }
 }

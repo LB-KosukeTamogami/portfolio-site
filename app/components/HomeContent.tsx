@@ -1,0 +1,80 @@
+'use client'
+
+import { useState } from 'react'
+import ProjectCard from './ProjectCard'
+import ProfileCard from './ProfileCard'
+import ProjectDetailModal from './ProjectDetailModal'
+import { ArrowRight, FolderOpen } from 'lucide-react'
+import Link from 'next/link'
+import { Project } from '@/app/types'
+
+interface HomeContentProps {
+  profiles: any
+  categoryStats: {
+    'homepage': number
+    'landing-page': number
+    'web-app': number
+    'mobile-app': number
+  }
+  featuredProjects: Project[]
+}
+
+export default function HomeContent({ profiles, categoryStats, featuredProjects }: HomeContentProps) {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleOpenDetail = (project: Project) => {
+    setSelectedProject(project)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setTimeout(() => setSelectedProject(null), 300)
+  }
+
+  return (
+    <>
+      <div className="p-6 pt-2">
+        {/* Profile Card */}
+        <ProfileCard profile={profiles} categoryStats={categoryStats} />
+
+        {/* Featured Projects */}
+        <section className="mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold">Featured Projects</h2>
+            <Link
+              href="/projects"
+              className="text-blue-600 hover:underline flex items-center gap-1"
+            >
+              View all <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+          
+          {featuredProjects.length === 0 ? (
+            <div className="bg-youtube-gray rounded-lg p-12 text-center">
+              <FolderOpen className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
+              <p className="text-xl text-muted-foreground">No featured projects yet</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featuredProjects.map((project) => (
+                <ProjectCard 
+                  key={project.id} 
+                  project={project} 
+                  onOpenDetail={handleOpenDetail}
+                />
+              ))}
+            </div>
+          )}
+        </section>
+      </div>
+
+      <ProjectDetailModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
+    </>
+  )
+}

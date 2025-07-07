@@ -2,14 +2,17 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { ExternalLink, Clock } from 'lucide-react'
+import { ExternalLink, Clock, ChevronDown, ChevronUp, Info } from 'lucide-react'
 import { Project } from '@/app/types'
+import { useState } from 'react'
 
 interface ProjectCardProps {
   project: Project
+  onOpenDetail?: (project: Project) => void
 }
 
-const ProjectCard = ({ project }: ProjectCardProps) => {
+const ProjectCard = ({ project, onOpenDetail }: ProjectCardProps) => {
+  const [isExpanded, setIsExpanded] = useState(false)
   const categoryColors = {
     'homepage': 'bg-purple-600',
     'landing-page': 'bg-pink-600',
@@ -79,9 +82,32 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
               {project.title}
             </h3>
             
-            <p className="text-xs text-muted-foreground line-clamp-2 mb-2">
-              {project.description}
-            </p>
+            <div className="mb-2">
+              <p className={`text-xs text-muted-foreground ${!isExpanded ? 'line-clamp-2' : ''}`}>
+                {project.description}
+              </p>
+              {project.description.length > 100 && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setIsExpanded(!isExpanded)
+                  }}
+                  className="text-xs text-blue-400 hover:text-blue-300 mt-1 flex items-center gap-1"
+                >
+                  {isExpanded ? (
+                    <>
+                      <ChevronUp className="w-3 h-3" />
+                      閉じる
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown className="w-3 h-3" />
+                      もっと見る
+                    </>
+                  )}
+                </button>
+              )}
+            </div>
             
             <div className="flex flex-wrap gap-1 mb-2">
               {project.technologies.slice(0, 3).map((tech) => (
@@ -96,9 +122,23 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
               )}
             </div>
             
-            <div className="flex items-center gap-1 text-xs text-muted-foreground">
-              <Clock className="w-3 h-3" />
-              <span>開発期間: {project.duration}</span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                <Clock className="w-3 h-3" />
+                <span>開発期間: {project.duration}</span>
+              </div>
+              {onOpenDetail && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onOpenDetail(project)
+                  }}
+                  className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1"
+                >
+                  <Info className="w-3 h-3" />
+                  詳細
+                </button>
+              )}
             </div>
         </div>
       </div>
