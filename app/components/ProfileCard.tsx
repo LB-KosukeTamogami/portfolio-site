@@ -23,8 +23,8 @@ interface ProfileCardProps {
 export default function ProfileCard({ profile, categoryStats }: ProfileCardProps) {
   const defaultProfile = {
     name: "LandBridge株式会社",
-    title: "AI × バイブコーディング開発",
-    bio: "このポートフォリオサイトは、バイブコーディング（音声入力による開発）とAI技術を組み合わせて開発したWebサイトやアプリケーションを掲載しています。最新のAI技術と効率的な開発手法により、高品質なプロダクトを短期間で実現しています。",
+    title: "AIによる自動コーディングを活用した開発実績",
+    bio: "当社では、AIによる自動コーディング手法「バイブコーディング」を取り入れることで、従来にないスピード感と柔軟性を備えた開発を実現しています。\n本サイトでは、その技術を活用して開発したWebサイトやアプリケーションの事例を掲載しています。\nご相談やお見積りなど、お気軽にお問い合わせください。",
     location: null,
     email: null,
     github_url: null,
@@ -48,7 +48,7 @@ export default function ProfileCard({ profile, categoryStats }: ProfileCardProps
           </h1>
           <p className="text-xl text-gray-300 mb-4">{data.title}</p>
           
-          <p className="text-lg mb-6 leading-relaxed text-gray-200">{data.bio}</p>
+          <div className="text-lg mb-6 leading-relaxed text-gray-200 whitespace-pre-line">{data.bio}</div>
           
           <div className="flex items-center gap-2 mt-6">
             <Link 
