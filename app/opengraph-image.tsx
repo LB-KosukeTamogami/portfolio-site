@@ -24,34 +24,58 @@ export default async function Image() {
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
+            position: 'relative',
           }}
         >
+          {/* グラデーション背景 */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to bottom right, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.2), rgba(99, 102, 241, 0.2))',
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to top right, transparent, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1))',
+            }}
+          />
+          
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexDirection: 'column',
+              position: 'relative',
+              zIndex: 10,
             }}
           >
+            {/* 会社名 */}
             <div
               style={{
-                fontSize: 60,
+                fontSize: 72,
                 fontWeight: 'bold',
-                color: '#60a5fa',
+                background: 'linear-gradient(to right, #60a5fa, #a78bfa)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
                 padding: '0 20px',
+                marginBottom: 16,
               }}
             >
               LandBridge株式会社
             </div>
+            {/* サブタイトル */}
             <div
               style={{
-                fontSize: 36,
-                color: '#e2e8f0',
-                marginTop: 20,
+                fontSize: 32,
+                color: '#cbd5e1',
+                fontWeight: 500,
               }}
             >
-              ポートフォリオサイト
+              AIによる自動コーディングを活用した開発実績
             </div>
           </div>
         </div>
