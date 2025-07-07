@@ -60,50 +60,35 @@ export default async function Image() {
                 zIndex: 10,
               }}
             >
-              {/* 会社名 - 白色でシンプルに */}
+              {/* 会社名 - ProfileCardと同じスタイル */}
               <h1
                 style={{
-                  fontSize: '72px',
+                  fontSize: '96px',
                   fontWeight: 'bold',
                   color: '#ffffff',
                   margin: '0',
-                  marginBottom: '24px',
+                  marginBottom: '40px',
                   letterSpacing: '0.02em',
-                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                  textShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
                 }}
               >
                 LandBridge株式会社
               </h1>
               
-              {/* サブタイトル - 少し透明度のある白 */}
+              {/* サブタイトル - ProfileCardのスタイルに合わせる */}
               <p
                 style={{
-                  fontSize: '32px',
+                  fontSize: '42px',
                   fontWeight: '500',
-                  color: 'rgba(255, 255, 255, 0.9)',
+                  color: 'rgba(255, 255, 255, 0.95)',
                   margin: '0',
-                  marginBottom: '40px',
                   textAlign: 'center',
-                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
+                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.15)',
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
                 }}
               >
                 AIによる自動コーディングを活用した開発実績
-              </p>
-              
-              {/* 説明文の一部 */}
-              <p
-                style={{
-                  fontSize: '20px',
-                  color: 'rgba(255, 255, 255, 0.8)',
-                  margin: '0',
-                  textAlign: 'center',
-                  maxWidth: '800px',
-                  lineHeight: '1.6',
-                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
-                }}
-              >
-                AIによる自動コーディング手法「バイブコーディング」を取り入れることで、
-                従来にないスピード感と柔軟性を備えた開発を実現しています。
               </p>
             </div>
           </div>
