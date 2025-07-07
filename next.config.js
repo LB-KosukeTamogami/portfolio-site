@@ -34,6 +34,15 @@ const nextConfig = {
       },
     ],
   },
+  swcMinify: true,
+  reactStrictMode: true,
+  poweredByHeader: false,
+  compress: true,
 }
 
-export default nextConfig
+// Bundle analyzer設定
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+module.exports = withBundleAnalyzer(nextConfig)

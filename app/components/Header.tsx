@@ -51,6 +51,7 @@ const Header = () => {
               href={item.href}
               onClick={() => setIsMenuOpen(false)}
               className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600/10 transition-colors"
+              prefetch={true}
             >
               <item.icon className="h-5 w-5" />
               <span>{item.label}</span>

@@ -1,10 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, lazy, Suspense, useMemo } from 'react'
 import ProjectCard from '@/app/components/ProjectCard'
-import ProjectDetailModal from '@/app/components/ProjectDetailModal'
 import { FolderOpen } from 'lucide-react'
 import { Project } from '@/app/types'
+
+// ProjectDetailModalを遅延読み込み
+const ProjectDetailModal = lazy(() => import('@/app/components/ProjectDetailModal'))
 
 const categories = [
   { id: 'all', label: 'すべて' },
@@ -23,10 +25,12 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   
-  // フィルタリング
-  const filteredProjects = activeCategory === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === activeCategory)
+  // フィルタリングをメモ化
+  const filteredProjects = useMemo(() => {
+    return activeCategory === 'all' 
+      ? projects 
+      : projects.filter(project => project.category === activeCategory)
+  }, [activeCategory, projects])
     
   const handleOpenDetail = (project: Project) => {
     setSelectedProject(project)
@@ -92,11 +96,13 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
         <div className="h-24" />
       </div>
 
-      <ProjectDetailModal
-        project={selectedProject}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-      />
+      <Suspense fallback={null}>
+        <ProjectDetailModal
+          project={selectedProject}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      </Suspense>
     </>
   )
 }

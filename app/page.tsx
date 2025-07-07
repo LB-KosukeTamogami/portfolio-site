@@ -1,24 +1,42 @@
 import MainLayout from './components/MainLayout'
 import HomeContent from './components/HomeContent'
 import { createClient } from '@/app/lib/supabase/server'
+import { unstable_cache } from 'next/cache'
+
+// データフェッチをキャッシュ
+const getCachedProjects = unstable_cache(
+  async () => {
+    const supabase = await createClient()
+    const { data: projects } = await supabase
+      .from('projects')
+      .select('*')
+      .order('order', { ascending: true })
+    return projects || []
+  },
+  ['projects'],
+  { revalidate: 60 } // 60秒間キャッシュ
+)
+
+const getCachedProfile = unstable_cache(
+  async () => {
+    const supabase = await createClient()
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('*')
+      .limit(1)
+      .single()
+    return profile
+  },
+  ['profile'],
+  { revalidate: 300 } // 5分間キャッシュ
+)
 
 export default async function HomePage() {
-  const supabase = await createClient()
-  
-  // Fetch projects from Supabase
-  const { data: projects, error } = await supabase
-    .from('projects')
-    .select('*')
-    .order('order', { ascending: true })
-  
-  // Fetch profile from Supabase
-  const { data: profiles } = await supabase
-    .from('profiles')
-    .select('*')
-    .limit(1)
-    .single()
-  
-  const allProjects = projects || []
+  // キャッシュされたデータを並列で取得
+  const [allProjects, profiles] = await Promise.all([
+    getCachedProjects(),
+    getCachedProfile()
+  ])
   const featuredProjects = allProjects.filter(p => p.featured)
   
   // カテゴリ別に集計

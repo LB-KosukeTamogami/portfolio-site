@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import MainLayout from '@/app/components/MainLayout'
 import { Send, Mail, User, Building, MessageSquare } from 'lucide-react'
 
@@ -14,7 +14,7 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitMessage('')
@@ -42,7 +42,7 @@ export default function ContactPage() {
     } finally {
       setIsSubmitting(false)
     }
-  }
+  }, [formData])
 
   return (
     <MainLayout>

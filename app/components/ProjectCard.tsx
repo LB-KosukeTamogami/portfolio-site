@@ -9,9 +9,10 @@ import { useState } from 'react'
 interface ProjectCardProps {
   project: Project
   onOpenDetail?: (project: Project) => void
+  priority?: boolean
 }
 
-const ProjectCard = ({ project, onOpenDetail }: ProjectCardProps) => {
+const ProjectCard = ({ project, onOpenDetail, priority = false }: ProjectCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const categoryColors = {
     'homepage': 'bg-purple-600',
@@ -54,6 +55,10 @@ const ProjectCard = ({ project, onOpenDetail }: ProjectCardProps) => {
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            loading={priority ? "eager" : "lazy"}
+            priority={priority}
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
           />
         </div>
         <div className={`absolute top-1 sm:top-2 right-1 sm:right-2 ${categoryColors[project.category]} text-white text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded`}>

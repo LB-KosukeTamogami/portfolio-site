@@ -1,12 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import ProjectCard from './ProjectCard'
 import ProfileCard from './ProfileCard'
-import ProjectDetailModal from './ProjectDetailModal'
 import { ArrowRight, FolderOpen } from 'lucide-react'
 import Link from 'next/link'
 import { Project } from '@/app/types'
+
+// ProjectDetailModalを遅延読み込み
+const ProjectDetailModal = lazy(() => import('./ProjectDetailModal'))
 
 interface HomeContentProps {
   profiles: any
@@ -61,11 +63,12 @@ export default function HomeContent({ profiles, categoryStats, featuredProjects 
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {featuredProjects.map((project) => (
+              {featuredProjects.map((project, index) => (
                 <ProjectCard 
                   key={project.id} 
                   project={project} 
                   onOpenDetail={handleOpenDetail}
+                  priority={index < 3} // 最初の3枚を優先読み込み
                 />
               ))}
             </div>
@@ -76,11 +79,13 @@ export default function HomeContent({ profiles, categoryStats, featuredProjects 
         <div className="h-24" />
       </div>
 
-      <ProjectDetailModal
-        project={selectedProject}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-      />
+      <Suspense fallback={null}>
+        <ProjectDetailModal
+          project={selectedProject}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      </Suspense>
     </>
   )
 }

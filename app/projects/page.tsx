@@ -2,6 +2,7 @@ import MainLayout from '@/app/components/MainLayout'
 import ProjectsClient from './ProjectsClient'
 import { createClient } from '@/app/lib/supabase/server'
 import { Metadata } from 'next'
+import { unstable_cache } from 'next/cache'
 
 export const metadata: Metadata = {
   title: '開発実績一覧 | LandBridge株式会社',
@@ -15,16 +16,22 @@ export const metadata: Metadata = {
   },
 }
 
+// プロジェクトデータをキャッシュ
+const getCachedProjects = unstable_cache(
+  async () => {
+    const supabase = await createClient()
+    const { data: projects } = await supabase
+      .from('projects')
+      .select('*')
+      .order('order', { ascending: true })
+    return projects || []
+  },
+  ['all-projects'],
+  { revalidate: 60 } // 60秒間キャッシュ
+)
+
 export default async function ProjectsPage() {
-  const supabase = await createClient()
-  
-  // Fetch projects from Supabase
-  const { data: projects, error } = await supabase
-    .from('projects')
-    .select('*')
-    .order('order', { ascending: true })
-  
-  const allProjects = projects || []
+  const allProjects = await getCachedProjects()
 
   return (
     <MainLayout>

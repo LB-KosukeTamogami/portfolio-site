@@ -30,6 +30,7 @@ const Sidebar = () => {
                   "hover:bg-blue-600/10",
                   isActive && "bg-blue-600/20 text-blue-400"
                 )}
+                prefetch={true}
               >
                 <item.icon className="h-5 w-5 flex-shrink-0" />
                 <span className="ml-3">{item.label}</span>
