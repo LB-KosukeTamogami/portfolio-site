@@ -68,6 +68,9 @@ export default function HomeContent({ profiles, categoryStats, featuredProjects 
             </div>
           )}
         </section>
+        
+        {/* 問い合わせボタンとの重なりを防ぐためのスペース */}
+        <div className="h-24" />
       </div>
 
       <ProjectDetailModal

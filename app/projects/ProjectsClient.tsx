@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import ProjectCard from '@/app/components/ProjectCard'
+import ProjectDetailModal from '@/app/components/ProjectDetailModal'
 import { FolderOpen } from 'lucide-react'
 import { Project } from '@/app/types'
 
@@ -19,14 +20,27 @@ interface ProjectsClientProps {
 
 export default function ProjectsClient({ projects }: ProjectsClientProps) {
   const [activeCategory, setActiveCategory] = useState('all')
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   
   // フィルタリング
   const filteredProjects = activeCategory === 'all' 
     ? projects 
     : projects.filter(project => project.category === activeCategory)
+    
+  const handleOpenDetail = (project: Project) => {
+    setSelectedProject(project)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setTimeout(() => setSelectedProject(null), 300)
+  }
 
   return (
-    <div className="p-6 pt-2">
+    <>
+      <div className="p-6 pt-2">
       <h1 className="text-3xl font-bold mb-6">All Projects</h1>
       
       {/* Category Tabs */}
@@ -60,10 +74,24 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+            <ProjectCard 
+              key={project.id} 
+              project={project} 
+              onOpenDetail={handleOpenDetail}
+            />
           ))}
         </div>
       )}
-    </div>
+        
+        {/* 問い合わせボタンとの重なりを防ぐためのスペース */}
+        <div className="h-24" />
+      </div>
+
+      <ProjectDetailModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
+    </>
   )
 }
