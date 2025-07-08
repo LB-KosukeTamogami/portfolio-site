@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { ExternalLink, Clock, ChevronDown, ChevronUp, Info } from 'lucide-react'
+import { Eye, Clock, ChevronDown, ChevronUp } from 'lucide-react'
 import { Project } from '@/app/types'
 import { useState } from 'react'
 
@@ -29,23 +29,21 @@ const ProjectCard = ({ project, onOpenDetail, priority = false }: ProjectCardPro
   }
 
   const handleCardClick = () => {
-    if (project.live_url) {
-      window.open(project.live_url, '_blank', 'noopener,noreferrer')
-    }
+    window.location.href = `/projects/${project.id}`
   }
 
   return (
     <div 
-      className={`video-card group ${project.live_url ? 'cursor-pointer hover:scale-105 transition-transform duration-200' : ''}`}
+      className="video-card group cursor-pointer hover:scale-105 transition-transform duration-200"
       onClick={handleCardClick}
-      role={project.live_url ? "button" : undefined}
-      tabIndex={project.live_url ? 0 : undefined}
+      role="button"
+      tabIndex={0}
       onKeyDown={(e) => {
-        if ((e.key === 'Enter' || e.key === ' ') && project.live_url) {
+        if (e.key === 'Enter' || e.key === ' ') {
           handleCardClick()
         }
       }}
-      title={project.live_url ? "クリックしてサイトを見る" : undefined}
+      title="クリックして詳細を見る"
     >
       <div className="relative">
         <div className="aspect-video relative overflow-hidden">
@@ -69,16 +67,14 @@ const ProjectCard = ({ project, onOpenDetail, priority = false }: ProjectCardPro
             Featured
           </div>
         )}
-        {project.live_url && (
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-            <div
-              className="p-3 bg-white/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ExternalLink className="w-6 h-6 text-black" />
-            </div>
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+          <div
+            className="p-3 bg-white/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Eye className="w-6 h-6 text-black" />
           </div>
-        )}
+        </div>
       </div>
       
       <div className="p-2.5 sm:p-3">
@@ -127,24 +123,10 @@ const ProjectCard = ({ project, onOpenDetail, priority = false }: ProjectCardPro
               )}
             </div>
             
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-0.5 sm:gap-1 text-[11px] sm:text-xs text-muted-foreground">
-                <Clock className="w-2.5 sm:w-3 h-2.5 sm:h-3" />
-                <span className="hidden sm:inline">開発期間: </span>
-                <span>{project.duration}</span>
-              </div>
-              {onOpenDetail && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    onOpenDetail(project)
-                  }}
-                  className="text-[11px] sm:text-xs text-blue-400 hover:text-blue-300 flex items-center gap-0.5 sm:gap-1 px-2 py-1 -mr-1 -mb-1 rounded"
-                >
-                  <Info className="w-2.5 sm:w-3 h-2.5 sm:h-3" />
-                  詳細
-                </button>
-              )}
+            <div className="flex items-center gap-0.5 sm:gap-1 text-[11px] sm:text-xs text-muted-foreground">
+              <Clock className="w-2.5 sm:w-3 h-2.5 sm:h-3" />
+              <span className="hidden sm:inline">開発期間: </span>
+              <span>{project.duration}</span>
             </div>
         </div>
       </div>

@@ -1,12 +1,9 @@
 'use client'
 
-import { useState, lazy, Suspense, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import ProjectCard from '@/app/components/ProjectCard'
 import { FolderOpen } from 'lucide-react'
 import { Project } from '@/app/types'
-
-// ProjectDetailModalを遅延読み込み
-const ProjectDetailModal = lazy(() => import('@/app/components/ProjectDetailModal'))
 
 const categories = [
   { id: 'all', label: 'すべて' },
@@ -22,8 +19,6 @@ interface ProjectsClientProps {
 
 export default function ProjectsClient({ projects }: ProjectsClientProps) {
   const [activeCategory, setActiveCategory] = useState('all')
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
   
   // フィルタリングをメモ化
   const filteredProjects = useMemo(() => {
@@ -32,18 +27,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
       : projects.filter(project => project.category === activeCategory)
   }, [activeCategory, projects])
     
-  const handleOpenDetail = (project: Project) => {
-    setSelectedProject(project)
-    setIsModalOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-    setTimeout(() => setSelectedProject(null), 300)
-  }
-
   return (
-    <>
       <div className="p-4 sm:p-6 pt-2 sm:pt-3">
       <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">開発実績一覧</h1>
       
@@ -86,7 +70,6 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
             <ProjectCard 
               key={project.id} 
               project={project} 
-              onOpenDetail={handleOpenDetail}
             />
           ))}
         </div>
@@ -95,14 +78,5 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
         {/* 問い合わせボタンとの重なりを防ぐためのスペース */}
         <div className="h-24" />
       </div>
-
-      <Suspense fallback={null}>
-        <ProjectDetailModal
-          project={selectedProject}
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-        />
-      </Suspense>
-    </>
   )
 }

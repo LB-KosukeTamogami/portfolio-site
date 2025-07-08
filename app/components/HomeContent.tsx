@@ -1,14 +1,10 @@
 'use client'
 
-import { useState, lazy, Suspense } from 'react'
 import ProjectCard from './ProjectCard'
 import ProfileCard from './ProfileCard'
 import { ArrowRight, FolderOpen } from 'lucide-react'
 import Link from 'next/link'
 import { Project } from '@/app/types'
-
-// ProjectDetailModalを遅延読み込み
-const ProjectDetailModal = lazy(() => import('./ProjectDetailModal'))
 
 interface HomeContentProps {
   profiles: any
@@ -22,21 +18,7 @@ interface HomeContentProps {
 }
 
 export default function HomeContent({ profiles, categoryStats, featuredProjects }: HomeContentProps) {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const handleOpenDetail = (project: Project) => {
-    setSelectedProject(project)
-    setIsModalOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-    setTimeout(() => setSelectedProject(null), 300)
-  }
-
   return (
-    <>
       <div className="p-4 sm:p-6 pt-2 sm:pt-3">
         {/* SEO用の非表示h1 */}
         <h1 className="sr-only">LandBridge株式会社 - AIによる自動コーディングを活用した開発実績</h1>
@@ -67,7 +49,6 @@ export default function HomeContent({ profiles, categoryStats, featuredProjects 
                 <ProjectCard 
                   key={project.id} 
                   project={project} 
-                  onOpenDetail={handleOpenDetail}
                   priority={index < 3} // 最初の3枚を優先読み込み
                 />
               ))}
@@ -78,14 +59,5 @@ export default function HomeContent({ profiles, categoryStats, featuredProjects 
         {/* 問い合わせボタンとの重なりを防ぐためのスペース */}
         <div className="h-24" />
       </div>
-
-      <Suspense fallback={null}>
-        <ProjectDetailModal
-          project={selectedProject}
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-        />
-      </Suspense>
-    </>
   )
 }
