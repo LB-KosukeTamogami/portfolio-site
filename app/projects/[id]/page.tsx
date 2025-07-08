@@ -5,13 +5,14 @@ import Link from 'next/link'
 import { mockProjects } from '@/app/lib/mock-data'
 
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
-export default function ProjectDetailPage({ params }: PageProps) {
-  const project = mockProjects.find(p => p.id === Number(params.id))
+export default async function ProjectDetailPage({ params }: PageProps) {
+  const { id } = await params
+  const project = mockProjects.find(p => p.id === id)
 
   if (!project) {
     notFound()
