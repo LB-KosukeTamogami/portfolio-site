@@ -4,15 +4,21 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { mockProjects } from '@/app/lib/mock-data'
 
-interface PageProps {
-  params: Promise<{
-    id: string
-  }>
+// 静的パラメータを生成
+export async function generateStaticParams() {
+  return mockProjects.map((project) => ({
+    id: project.id,
+  }))
 }
 
-export default async function ProjectDetailPage({ params }: PageProps) {
-  const { id } = await params
-  const project = mockProjects.find(p => p.id === id)
+// Next.js 15の新しい形式に対応
+export default async function ProjectDetailPage({ 
+  params 
+}: { 
+  params: Promise<{ id: string }> 
+}) {
+  const resolvedParams = await params
+  const project = mockProjects.find(p => p.id === resolvedParams.id)
 
   if (!project) {
     notFound()
