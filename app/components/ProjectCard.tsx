@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Clock, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react'
 import { Project } from '@/app/types'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 interface ProjectCardProps {
   project: Project
@@ -14,6 +15,7 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ project, onOpenDetail, priority = false }: ProjectCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false)
+  const router = useRouter()
   const categoryColors = {
     'homepage': 'bg-purple-600',
     'landing-page': 'bg-pink-600',
@@ -29,7 +31,7 @@ const ProjectCard = ({ project, onOpenDetail, priority = false }: ProjectCardPro
   }
 
   const handleCardClick = () => {
-    window.location.href = `/projects/${project.id}`
+    router.push(`/projects/${project.id}`)
   }
 
   return (
