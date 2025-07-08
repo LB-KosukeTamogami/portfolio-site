@@ -1,13 +1,16 @@
-'use client'
-
-import { useParams, notFound } from 'next/navigation'
-import { X, ExternalLink, Github, Clock, ArrowLeft } from 'lucide-react'
+import { notFound } from 'next/navigation'
+import { ExternalLink, Github, Clock, ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { mockProjects } from '@/app/lib/mock-data'
 
-export default function ProjectDetailPage() {
-  const params = useParams()
+interface PageProps {
+  params: {
+    id: string
+  }
+}
+
+export default function ProjectDetailPage({ params }: PageProps) {
   const project = mockProjects.find(p => p.id === Number(params.id))
 
   if (!project) {

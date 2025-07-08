@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { Eye, Clock, ChevronDown, ChevronUp } from 'lucide-react'
+import { Clock, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react'
 import { Project } from '@/app/types'
 import { useState } from 'react'
 
@@ -67,12 +67,13 @@ const ProjectCard = ({ project, onOpenDetail, priority = false }: ProjectCardPro
             Featured
           </div>
         )}
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center pb-6">
           <div
-            className="p-3 bg-white/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
+            className="flex items-center gap-2 px-4 py-2 bg-white/95 backdrop-blur-sm rounded-full shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300"
             onClick={(e) => e.stopPropagation()}
           >
-            <Eye className="w-6 h-6 text-black" />
+            <span className="text-black font-medium text-sm">View Details</span>
+            <ArrowRight className="w-4 h-4 text-black" />
           </div>
         </div>
       </div>
