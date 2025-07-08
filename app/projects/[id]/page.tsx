@@ -3,6 +3,7 @@ import { ExternalLink, Github, Clock, ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { mockProjects } from '@/app/lib/mock-data'
+import MainLayout from '@/app/components/MainLayout'
 
 // 静的パラメータを生成
 export async function generateStaticParams() {
@@ -39,7 +40,7 @@ export default async function ProjectDetailPage({
   }
 
   return (
-    <div className="min-h-screen bg-youtube-dark text-white">
+    <MainLayout>
       <div className="max-w-4xl mx-auto p-4 sm:p-6">
         <Link
           href="/projects"
@@ -128,6 +129,6 @@ export default async function ProjectDetailPage({
           </div>
         </div>
       </div>
-    </div>
+    </MainLayout>
   )
 }
